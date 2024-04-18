@@ -5,6 +5,8 @@ import co.edu.uniquindio.bankingsystem.bankingsystem.model.BankingSystem;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
 import co.edu.uniquindio.bankingsystem.bankingsystem.services.IBuilder;
 
+import java.time.LocalDate;
+
 public class CustomerBuilder implements IBuilder {
     private  String name;
     private  String DNI;
@@ -13,6 +15,8 @@ public class CustomerBuilder implements IBuilder {
     private  String phoneNumber;
     private Account associatedAccount;
     private BankingSystem ownByBankingSystem;
+    private LocalDate birthDate;
+    private LocalDate registrationDate;
 
     public CustomerBuilder setName(String name){
         this.name = name;
@@ -47,12 +51,22 @@ public class CustomerBuilder implements IBuilder {
     public CustomerBuilder setOwnByBankingSystem(BankingSystem ownByBankingSystem){
         this.ownByBankingSystem = ownByBankingSystem;
         return  this;
+    }
 
+    public CustomerBuilder setBirthDate(LocalDate birthDate){
+        this.birthDate = birthDate;
+        return this;
+    }
+
+    public CustomerBuilder setRegistrationDate(LocalDate registrationDate){
+        this.registrationDate = registrationDate;
+        return this;
     }
 
     @Override
     public Customer build(){
         return new Customer(name, DNI, adress, email,
-                phoneNumber,associatedAccount, ownByBankingSystem ) ;
+                phoneNumber,associatedAccount, ownByBankingSystem,
+                birthDate, registrationDate) ;
     }
 }

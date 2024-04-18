@@ -3,6 +3,7 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.controller;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.ModelFactory;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class CustomerManagementTabController {
@@ -26,5 +27,13 @@ public class CustomerManagementTabController {
 
     public boolean upDateCustomer(Customer selectedCustomer, Customer customerUpdate) {
         return modelFactory.upDateCustomer(selectedCustomer, customerUpdate);
+    }
+
+    public List<Customer> getCustomersOfAge(int age) {
+        return modelFactory.getCustomersOfAge(age);
+    }
+
+    public List<Customer> getCustomersPostRegistration(LocalDate postRegistrationDate) {
+        return modelFactory.getCustomersPostRegistration(postRegistrationDate);
     }
 }

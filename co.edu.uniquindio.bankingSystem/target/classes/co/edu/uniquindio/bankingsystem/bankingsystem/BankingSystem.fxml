@@ -12,7 +12,7 @@
         <ColorAdjust brightness="-0.19" contrast="0.12" />
     </effect>
     <children>
-        <TabPane prefHeight="618.0" prefWidth="680.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="726.0" prefWidth="678.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Gestion Clientes">
                     <content>

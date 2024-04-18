@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +46,25 @@ public class CustomerManagementTabViewController {
     private Button btnUpdate;
 
     @FXML
+    private Button btnGetAge;
+
+    @FXML
+    private Button btnGetPostRegistration;
+
+    @FXML
+    private DatePicker dpBirthDate;
+
+    @FXML
+    private DatePicker dpGetPostRegistration;
+
+    @FXML
     private TableView<Customer> tblCustomer;
+
+    @FXML
+    private TableColumn<Customer, String> tcBirthDate;
+
+    @FXML
+    private TableColumn<Customer, String> tcRegistrationDate;
 
     @FXML
     private TableColumn<Customer, String> tcAddress;
@@ -63,6 +83,9 @@ public class CustomerManagementTabViewController {
 
     @FXML
     private TextField txtAddress;
+
+    @FXML
+    private TextField txtGetAge;
 
     @FXML
     private TextField txtDNI;
@@ -103,6 +126,15 @@ public class CustomerManagementTabViewController {
     }
 
 
+    @FXML
+    void onGetAge(ActionEvent event) {
+        getAge();
+    }
+
+    @FXML
+    void onGetPostRegistration(ActionEvent event) {
+        getPostRegistration();
+    }
 
     @FXML
     void initialize() {
@@ -125,6 +157,8 @@ public class CustomerManagementTabViewController {
         tcEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         tcPhoneNumber.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
         tcAddress.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress()));
+        tcBirthDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBirthDate().toString()));
+        tcRegistrationDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRegistrationDate().toString()));
     }
 
     public void getCustomerList() {
@@ -167,6 +201,7 @@ public class CustomerManagementTabViewController {
             txtEmail.setText(selectedCustomer.getEmail());
             txtPhoneNumber.setText(selectedCustomer.getPhoneNumber());
             txtAddress.setText(selectedCustomer.getAddress());
+            dpBirthDate.setValue(selectedCustomer.getBirthDate());
         }
     }
 
@@ -199,6 +234,7 @@ public class CustomerManagementTabViewController {
         txtEmail.setText("");
         txtPhoneNumber.setText("");
         txtAddress.setText("");
+        dpBirthDate.setValue(null);
     }
 
     private boolean validateForm() {
@@ -206,7 +242,8 @@ public class CustomerManagementTabViewController {
                 && !txtDNI.getText().isEmpty()
                 && !txtEmail.getText().isEmpty()
                 && !txtPhoneNumber.getText().isEmpty()
-                && !txtAddress.getText().isEmpty();
+                && !txtAddress.getText().isEmpty()
+                && dpBirthDate.getValue() != null;
     }
 
     private Customer buildDataCustomer() {
@@ -216,6 +253,8 @@ public class CustomerManagementTabViewController {
                 .setAdress(txtAddress.getText())
                 .setEmail(txtEmail.getText())
                 .setPhoneNumber(txtPhoneNumber.getText())
+                .setBirthDate(dpBirthDate.getValue())
+                .setRegistrationDate(LocalDate.now())
                 .build();
     }
 
@@ -286,8 +325,31 @@ public class CustomerManagementTabViewController {
         aler.showAndWait();
     }
 
+    private void getAge() {
+        String ageText = txtGetAge.getText();
+        if (ageText.isEmpty()) {
+            tblCustomer.setItems(customerList);
+        } else {
+            try {
+                int age = Integer.parseInt(ageText);
+                List<Customer> customersOfAge = customerManagementTabController
+                        .getCustomersOfAge(age);
+                tblCustomer.setItems(FXCollections.observableList(customersOfAge));
+            } catch (NumberFormatException e) {
+                showMessage("Error", "Edad inválida", "Por favor, ingrese una edad válida.", Alert.AlertType.ERROR);
+            }
+        }
+    }
 
-
-
+    private void getPostRegistration() {
+        LocalDate postRegistrationDate = dpGetPostRegistration.getValue();
+        if (postRegistrationDate == null || postRegistrationDate.toString().isEmpty()) {
+            tblCustomer.setItems(customerList);
+        } else {
+            List<Customer> customersPostRegistration = customerManagementTabController
+                    .getCustomersPostRegistration(postRegistrationDate);
+            tblCustomer.setItems(FXCollections.observableList(customersPostRegistration));
+        }
+    }
 
 }

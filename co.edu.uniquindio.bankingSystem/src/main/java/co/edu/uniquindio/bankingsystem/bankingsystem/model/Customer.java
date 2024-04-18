@@ -2,6 +2,7 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.model;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,12 @@ public class Customer {
     private  String phoneNumber;
     private Account associatedAccount;
     private BankingSystem ownByBankingSystem;
+    private LocalDate birthDate;
+    private LocalDate registrationDate;
 
     public Customer(String name, String DNI, String address, String email, String phoneNumber,
-                    Account associatedAccount, BankingSystem ownByBankingSystem){
+                    Account associatedAccount, BankingSystem ownByBankingSystem,
+                    LocalDate birthDate, LocalDate registrationDate){
         this.name = name;
         this.DNI = DNI;
         this.address = address;
@@ -23,6 +27,8 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.associatedAccount = associatedAccount;
         this.ownByBankingSystem = ownByBankingSystem;
+        this.birthDate = birthDate;
+        this.registrationDate = registrationDate;
     }
 
     public String getName(){
@@ -51,5 +57,13 @@ public class Customer {
 
     public BankingSystem getBankingSystem() {
         return ownByBankingSystem;
+    }
+
+    public LocalDate getBirthDate(){
+        return birthDate;
+    }
+
+    public LocalDate getRegistrationDate(){
+        return registrationDate;
     }
 }

@@ -2,8 +2,11 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.model;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.*;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BankingSystem {
     private final String name;
@@ -116,9 +119,9 @@ public class BankingSystem {
     }
 
     public boolean removeCustomer(Customer selectedCustomer) {
-        if (selectedCustomer != null){
+        if (selectedCustomer != null) {
             int index = customerList.indexOf(selectedCustomer);
-            if(index!=-1){
+            if (index != -1) {
                 customerList.remove(index);
                 return true;
             }
@@ -133,8 +136,7 @@ public class BankingSystem {
         if (customerFound == null) {
             addCustomerList(newCustomer);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -154,5 +156,17 @@ public class BankingSystem {
             return true;
         }
         return false;
+    }
+
+    public List<Customer> getCustomersOfAge(int age) {
+        return customerList.stream()
+                .filter(customer -> Period.between(customer.getBirthDate(), LocalDate.now()).getYears() == age)
+                .collect(Collectors.toList());
+    }
+
+    public List<Customer> getCustomersPostRegistration(LocalDate postRegistrationDate) {
+        return customerList.stream()
+                .filter(customer -> customer.getRegistrationDate().isAfter(postRegistrationDate))
+                .collect(Collectors.toList());
     }
 }
