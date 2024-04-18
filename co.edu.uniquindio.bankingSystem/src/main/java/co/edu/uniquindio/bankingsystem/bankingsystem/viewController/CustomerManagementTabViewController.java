@@ -6,17 +6,22 @@ import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.CustomerBuild
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerManagementTabViewController {
     CustomerManagementTabController customerManagementTabController;
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
+
+    FilteredList<Customer> filteredCustomerList;
 
     Customer selectedCustomer;
 
@@ -72,6 +77,9 @@ public class CustomerManagementTabViewController {
     private TextField txtPhoneNumber;
 
     @FXML
+    private TextField txtFilter;
+
+    @FXML
     void onAdd(ActionEvent event) {
         addCustomer();
     }
@@ -100,13 +108,14 @@ public class CustomerManagementTabViewController {
     void initialize() {
         customerManagementTabController = new CustomerManagementTabController();
         initView();
+        setupFilter();
     }
 
     private void initView() {
         initDataBinding();
         getCustomerList();
         tblCustomer.getItems().clear();
-        tblCustomer.setItems(customerList);
+        tblCustomer.setItems(filteredCustomerList);
         listenerSelection();
     }
 
@@ -120,6 +129,28 @@ public class CustomerManagementTabViewController {
 
     public void getCustomerList() {
         customerList.addAll(customerManagementTabController.getCustomerList());
+        filteredCustomerList = new FilteredList<>(customerList, p -> true);
+    }
+
+    private void setupFilter() {
+        txtFilter.textProperty().addListener((observable, oldValue, newValue) -> {
+            List<Customer> originalList = customerManagementTabController.getCustomerList();
+            ObservableList<Customer> filteredList = filterList(originalList, newValue);
+            tblCustomer.setItems(filteredList);
+        });
+    }
+
+    private boolean searchFindsCustomer(Customer customer, String searchText){
+    return (customer.getDNI().toLowerCase().contains(searchText.toLowerCase())) ||
+            (customer.getEmail().toLowerCase().contains(searchText.toLowerCase()));
+}
+
+    private ObservableList<Customer> filterList(List<Customer> list, String searchText){
+        List<Customer> filteredList = new ArrayList<>();
+        for (Customer customer : list){
+            if(searchFindsCustomer(customer, searchText)) filteredList.add(customer);
+        }
+        return FXCollections.observableList(filteredList);
     }
 
     private void listenerSelection() {

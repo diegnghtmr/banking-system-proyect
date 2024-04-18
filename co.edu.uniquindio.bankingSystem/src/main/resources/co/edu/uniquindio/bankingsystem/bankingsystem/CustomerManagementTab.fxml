@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bankingsystem.bankingsystem.viewController.CustomerManagementTabViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bankingsystem.bankingsystem.viewController.CustomerManagementTabViewController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="590.0" prefWidth="656.0">
          <children>
@@ -20,20 +20,20 @@
             </Label>
             <Label layoutX="47.0" layoutY="81.0" text="Nombre:" />
             <Separator layoutX="228.0" layoutY="52.0" prefWidth="200.0" />
-            <Label layoutX="352.0" layoutY="81.0" text="DNI:" />
+            <Label layoutX="407.0" layoutY="81.0" text="DNI:" />
             <Label layoutX="47.0" layoutY="141.0" text="Direccion:" />
-            <Label layoutX="349.0" layoutY="141.0" text="Email:" />
+            <Label layoutX="405.0" layoutY="141.0" text="Email:" />
             <Label layoutX="47.0" layoutY="202.0" text="Telefono:" />
             <TextField fx:id="txtName" layoutX="119.0" layoutY="77.0" />
             <TextField fx:id="txtAddress" layoutX="119.0" layoutY="137.0" />
             <TextField fx:id="txtPhoneNumber" layoutX="119.0" layoutY="198.0" />
-            <TextField fx:id="txtDNI" layoutX="458.0" layoutY="69.0" />
+            <TextField fx:id="txtDNI" layoutX="458.0" layoutY="77.0" />
             <TextField fx:id="txtEmail" layoutX="458.0" layoutY="137.0" />
             <Button fx:id="btnAdd" layoutX="303.0" layoutY="255.0" mnemonicParsing="false" onAction="#onAdd" text="Agregar" />
             <Button fx:id="btnNew" layoutX="100.0" layoutY="255.0" mnemonicParsing="false" onAction="#onNew" text="Nuevo" />
             <Button fx:id="btnUpdate" layoutX="499.0" layoutY="255.0" mnemonicParsing="false" onAction="#onUpdate" text="Actualizar" />
             <Separator layoutX="104.0" layoutY="296.0" prefHeight="2.0" prefWidth="450.0" />
-            <TableView fx:id="tblCustomer" layoutX="47.0" layoutY="316.0" prefHeight="218.0" prefWidth="561.0">
+            <TableView fx:id="tblCustomer" layoutX="49.0" layoutY="416.0" prefHeight="218.0" prefWidth="561.0">
                <columns>
                   <TableColumn fx:id="tcName" prefWidth="138.0" text="Nombre" />
                   <TableColumn fx:id="tcDNI" prefWidth="93.0" text="DNI" />
@@ -42,7 +42,9 @@
                   <TableColumn fx:id="tcPhoneNumber" prefWidth="120.0" text="Telefono" />
                </columns>
             </TableView>
-            <Button fx:id="btbRemove" layoutX="303.0" layoutY="545.0" mnemonicParsing="false" onAction="#onRemove" text="Eliminar" />
+            <Button fx:id="btbRemove" layoutX="303.0" layoutY="647.0" mnemonicParsing="false" onAction="#onRemove" text="Eliminar" />
+            <TextField fx:id="txtFilter" layoutX="94.0" layoutY="317.0" />
+            <Label layoutX="57.0" layoutY="321.0" text="Filtrar:" />
          </children>
       </AnchorPane>
    </children>
