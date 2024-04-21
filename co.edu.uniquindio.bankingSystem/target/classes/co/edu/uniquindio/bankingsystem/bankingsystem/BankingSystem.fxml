@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+
 <AnchorPane prefHeight="600.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bankingsystem.bankingsystem.viewController.BankingSystemViewController">
     <effect>
         <ColorAdjust brightness="-0.19" contrast="0.12" />
@@ -18,7 +17,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                <SplitPane prefHeight="510.0" prefWidth="602.0">
                                     <items>
                                         <fx:include source="CustomerManagementTab.fxml" />
                                     </items>
@@ -27,6 +26,19 @@
                         </AnchorPane>
                     </content>
                 </Tab>
+            <Tab text="Gestón cuentas">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <SplitPane prefHeight="510.0" prefWidth="602.0">
+                              <items>
+                                  <fx:include source="ManagementCheckingAccount.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             </tabs>
         </TabPane>
     </children>

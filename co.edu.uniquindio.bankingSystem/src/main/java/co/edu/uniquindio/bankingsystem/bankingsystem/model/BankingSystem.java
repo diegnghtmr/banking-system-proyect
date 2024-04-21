@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.model;
 
+import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.*;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ public class BankingSystem {
     private List<Deposit> depositList;
     private List<Withdrawal> withdrawalList;
     private List<Transfer> transferList;
+    private List<Account> accountList;
 
 
     public BankingSystem() {
@@ -28,6 +30,7 @@ public class BankingSystem {
         this.depositList = new ArrayList<>();
         this.withdrawalList = new ArrayList<>();
         this.transferList = new ArrayList<>();
+        this.accountList = new ArrayList<>();
     }
 
     public String getName() {
@@ -41,6 +44,7 @@ public class BankingSystem {
     public List<Customer> getCustomerList() {
         return customerList;
     }
+
 
     public List<CheckingAccount> getCheckingAccountList() {
         return checkingAccountList;
@@ -61,6 +65,10 @@ public class BankingSystem {
     public List<Transfer> getTransferList() {
         return transferList;
     }
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
 
     public void addEmployeeList(Employee employee) {
         employeeList.add(employee);
@@ -169,4 +177,25 @@ public class BankingSystem {
                 .filter(customer -> customer.getRegistrationDate().isAfter(postRegistrationDate))
                 .collect(Collectors.toList());
     }
+
+
+    public boolean createCheckingAccount(CheckingAccount checkingAccount) {
+        CheckingAccount checkingAccountFound = searchAccount(checkingAccount.getAccountNumber());
+
+        if(checkingAccountFound==null){
+            checkingAccountList.add(checkingAccount);
+            return true;
+        }
+        return false;
+    }
+
+    private CheckingAccount searchAccount(String accountNumber) {
+        for(CheckingAccount checkingAccount: checkingAccountList){
+            if(checkingAccount.getAccountNumber().equalsIgnoreCase(accountNumber)){
+                return checkingAccount;
+            }
+        }
+        return null;
+    }
+
 }

@@ -49,6 +49,18 @@ public abstract class Account {
         this.balance = balance;
     }
 
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setOpeningDate(LocalDate openingDate) {
+        this.openingDate = openingDate;
+    }
+
+    public void setSecurityNumber(int securityNumber) {
+        this.securityNumber = securityNumber;
+    }
+
     public void setCustomer(Customer customer){
         this.customer = customer;
     }

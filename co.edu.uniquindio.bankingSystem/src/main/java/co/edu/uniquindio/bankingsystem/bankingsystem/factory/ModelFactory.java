@@ -187,4 +187,13 @@ public class ModelFactory {
     public List<Customer> getCustomersPostRegistration(LocalDate postRegistrationDate) {
         return bankingSystem.getCustomersPostRegistration(postRegistrationDate);
     }
+
+
+    public List<CheckingAccount> getCheckingAccountList() {
+        return bankingSystem.getCheckingAccountList();
+    }
+
+    public boolean createCheckingAccount(CheckingAccount checkingAccount) {
+        return bankingSystem.createCheckingAccount(checkingAccount);
+    }
 }
