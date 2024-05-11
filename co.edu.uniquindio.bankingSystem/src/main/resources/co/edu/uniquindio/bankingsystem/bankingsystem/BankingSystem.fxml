@@ -26,19 +26,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-            <Tab text="Gestón cuentas">
-              <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                      <children>
-                          <SplitPane prefHeight="510.0" prefWidth="602.0">
-                              <items>
-                                  <fx:include source="ManagementCheckingAccount.fxml" />
-                              </items>
-                          </SplitPane>
-                      </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
+           
             </tabs>
         </TabPane>
     </children>
