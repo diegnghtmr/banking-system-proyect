@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.effect.ColorAdjust?>
+<AnchorPane prefHeight="570.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bankingsystem.bankingsystem.viewController.CashierInterfaceViewController">
+    <effect>
+        <ColorAdjust brightness="-0.19" contrast="0.12" />
+    </effect>
+    <children>
+        <TabPane prefHeight="570.0" prefWidth="664.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Datos">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                    <items>
+                                        <fx:include source="ManagerData.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Gestion Clientes">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                    <items>
+                                        <fx:include source="CustomerManagement.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Cuentas Ahorro">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                    <items>
+                                        <fx:include source="SavingsAccountManagement.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Cuentas Corriente">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                    <items>
+                                        <fx:include source="CheckingAccountManagement.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Prestamos">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                    <items>
+                                        <fx:include source="LoanManagement.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Asociación Cuentas">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                    <items>
+                                        <fx:include source="AccountAssociationManagement.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Transacciones">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                    <items>
+                                        <fx:include source="TransactionManagement.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+
+</AnchorPane>

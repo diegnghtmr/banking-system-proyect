@@ -20,7 +20,7 @@ public class BankingSystem {
 
 
     public BankingSystem() {
-        this.name = "Bite Bank";
+        this.name = "Byte Bank";
         this.employeeList = new ArrayList<>();
         this.customerList = new ArrayList<>();
         this.checkingAccountList = new ArrayList<>();

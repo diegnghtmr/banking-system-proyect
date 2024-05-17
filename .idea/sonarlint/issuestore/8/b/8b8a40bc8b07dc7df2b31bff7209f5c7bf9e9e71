@@ -1,0 +1,10 @@
+
+ƒ
+java:S1192Þ"FDefine a constant instead of duplicating this literal "Error" 6 times.(½Îí÷J$c81e18fb-2198-48de-aea5-9eae10cb8f0e
+”	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¾ŸÅ|J$ec94246a-68b0-445d-a124-de9a7e60fc7c
+Ž
+java:S3655¸"LCall "action.isPresent()" or "!action.isEmpty()" before accessing the value.(ãî«ÁúÿÿÿÿJ$f9d84ecb-8992-4322-8d5d-aab6ba6032d2
+ƒ
+java:S1126¸"AReplace this if-then-else statement by a single return statement.(ãî«ÁúÿÿÿÿJ$8e3dd9e9-b6ec-4c61-bdcc-f37f61c6f54a
+i
+java:S1128"-Remove this unused import 'java.time.Period'.(šÉ¢½J$1e2b39ff-20bf-452d-a9e5-a48894ffba1f
