@@ -40,6 +40,19 @@
                         </AnchorPane>
                     </content>
                 </Tab>
+                <Tab text="Gestion Cajeros">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
+                                    <items>
+                                        <fx:include source="CashierManagement.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
                 <Tab text="Cuentas Ahorro">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

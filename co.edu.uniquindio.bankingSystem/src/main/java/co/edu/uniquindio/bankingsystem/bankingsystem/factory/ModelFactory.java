@@ -8,7 +8,10 @@ import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementatio
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Withdrawal;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.BankingSystem;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.CustomerBuilder;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuilder;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +33,11 @@ public class ModelFactory {
     }
 
     private void initializeData() {
+        initCustomer();
+        initEmployee();
+    }
+
+    private void initCustomer() {
         AccountFactory accountFactory = new AccountFactory();
         TransactionFactory transactionFactory = new TransactionFactory();
 
@@ -164,6 +172,69 @@ public class ModelFactory {
         bankingSystem.addCustomerList(customer7);
     }
 
+    private void initEmployee() {
+        Employee employee1 = new EmployeeBuilder()
+                .setName("Jhon Oscar")
+                .setTypeEmployee(TypeEmployee.MANAGER)
+                .setEmail("josalazar@uniquindio.edu.co")
+                .setAddress("Calle 13")
+                .setDNI("456789123")
+                .setPhone("3148613948")
+                .setPassword("estovalelaplata")
+                .setRegistrationDate(LocalDate.now())
+                .build();
+
+        Employee employee2 = new EmployeeBuilder()
+                .setName("Carlos Perez")
+                .setTypeEmployee(TypeEmployee.CASHIER)
+                .setEmail("carlos.perez@uniquindio.edu.co")
+                .setAddress("Calle 14")
+                .setDNI("789123456")
+                .setPhone("3188613999")
+                .setPassword("contraseniaxd")
+                .setRegistrationDate(LocalDate.now())
+                .build();
+
+        Employee employee3 = new EmployeeBuilder()
+                .setName("Ana Gomez")
+                .setTypeEmployee(TypeEmployee.CASHIER)
+                .setEmail("ana.gomez@uniquindio.edu.co")
+                .setAddress("Calle 15")
+                .setDNI("654987321")
+                .setPhone("3008613950")
+                .setPassword("ajoconcebolla")
+                .setRegistrationDate(LocalDate.now())
+                .build();
+
+        Employee employee4 = new EmployeeBuilder()
+                .setName("Luis Morales")
+                .setTypeEmployee(TypeEmployee.CASHIER)
+                .setEmail("luis.morales@uniquindio.edu.co")
+                .setAddress("Calle 16")
+                .setDNI("987321654")
+                .setPhone("3158613951")
+                .setPassword("holamundouwu")
+                .setRegistrationDate(LocalDate.now())
+                .build();
+
+        Employee employee5 = new EmployeeBuilder()
+                .setName("Maria Rodriguez")
+                .setTypeEmployee(TypeEmployee.CASHIER)
+                .setEmail("maria.rodriguez@uniquindio.edu.co")
+                .setAddress("Calle 17")
+                .setDNI("421654987")
+                .setPhone("3148677952")
+                .setPassword("unavacasincola")
+                .setRegistrationDate(LocalDate.now())
+                .build();
+
+        bankingSystem.addEmployeeList(employee1);
+        bankingSystem.addEmployeeList(employee2);
+        bankingSystem.addEmployeeList(employee3);
+        bankingSystem.addEmployeeList(employee4);
+        bankingSystem.addEmployeeList(employee5);
+    }
+
     public List<Customer> getCustomerList() {
         return bankingSystem.getCustomerList();
     }
@@ -186,5 +257,21 @@ public class ModelFactory {
 
     public List<Customer> getCustomersPostRegistration(LocalDate postRegistrationDate) {
         return bankingSystem.getCustomersPostRegistration(postRegistrationDate);
+    }
+
+    public List<Employee> getEmployeesList() {
+        return bankingSystem.getEmployeesList();
+    }
+
+    public boolean createCashier(Employee cashier) {
+return bankingSystem.createCashier(cashier);
+    }
+
+    public boolean removeCashier(Employee cashierSelected) {
+        return bankingSystem.removeCashier(cashierSelected);
+    }
+
+    public boolean upDateCashier(Employee cashierSelected, Employee cashierUpdate) {
+        return bankingSystem.upDateCashier(cashierSelected, cashierUpdate);
     }
 }

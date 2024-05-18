@@ -169,4 +169,48 @@ public class BankingSystem {
                 .filter(customer -> customer.getRegistrationDate().isAfter(postRegistrationDate))
                 .collect(Collectors.toList());
     }
+
+    public List<Employee> getEmployeesList() {
+        return employeeList;
+
+    }
+
+    public boolean createCashier(Employee cashier) {
+        Employee employeeFound = getEmployee(cashier.getDNI());
+
+        if (employeeFound == null) {
+            addEmployeeList(cashier);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private Employee getEmployee(String dni) {
+        return getEmployeeList().stream()
+                        .filter(employee -> employee.getDNI().equalsIgnoreCase(dni))
+                        .findFirst()
+                        .orElse(null);
+    }
+
+    public boolean removeCashier(Employee cashierSelected) {
+        if (cashierSelected != null) {
+            int index = employeeList.indexOf(cashierSelected);
+            if (index != -1) {
+                employeeList.remove(index);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean upDateCashier(Employee cashierSelected, Employee cashierUpdate) {
+        int index = employeeList.indexOf(cashierSelected);
+        if (index != -1) {
+            employeeList.set(index, cashierUpdate);
+            return true;
+        }
+        return false;
+
+    }
 }
