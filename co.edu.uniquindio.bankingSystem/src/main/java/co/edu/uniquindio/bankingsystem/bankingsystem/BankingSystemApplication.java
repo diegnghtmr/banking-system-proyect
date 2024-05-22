@@ -10,7 +10,7 @@ import java.io.IOException;
 public class BankingSystemApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BankingSystemApplication.class.getResource("ManagerInterface.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(BankingSystemApplication.class.getResource("/startup.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("App Byte Bank");
         stage.setScene(scene);

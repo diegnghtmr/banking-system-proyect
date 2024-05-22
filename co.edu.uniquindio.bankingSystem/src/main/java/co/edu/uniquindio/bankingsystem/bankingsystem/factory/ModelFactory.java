@@ -274,4 +274,12 @@ return bankingSystem.createCashier(cashier);
     public boolean upDateCashier(Employee cashierSelected, Employee cashierUpdate) {
         return bankingSystem.upDateCashier(cashierSelected, cashierUpdate);
     }
+
+    public Employee validateEmployee(String employee, String password) {
+        return bankingSystem.validateEmployee(employee, password);
+    }
+
+    public Employee addEmployee(String identification, String name, String email, String address, String password, String phone) {
+        return bankingSystem.addEmployee(identification, name, email, address, password, phone);
+    }
 }

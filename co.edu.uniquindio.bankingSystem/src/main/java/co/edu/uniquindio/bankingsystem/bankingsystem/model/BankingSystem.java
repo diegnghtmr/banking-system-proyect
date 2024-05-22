@@ -1,6 +1,8 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.model;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.*;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuilder;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -212,5 +214,28 @@ public class BankingSystem {
         }
         return false;
 
+    }
+
+    public Employee validateEmployee(String employee, String password) {
+        return employeeList.stream()
+                .filter(currentEmployee -> currentEmployee.getDNI().equalsIgnoreCase(employee) && currentEmployee.getPassword().equals(password))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Employee addEmployee(String identification, String name, String email, String address, String password, String phone) {
+        Employee employee = new EmployeeBuilder()
+                .setDNI(identification)
+                .setName(name)
+                .setEmail(email)
+                .setAddress(address)
+                .setPassword(password)
+                .setPhone(phone)
+                .setTypeEmployee(TypeEmployee.MANAGER)
+                .setRegistrationDate(LocalDate.now())
+                .build();
+
+        addEmployeeList(employee);
+        return employee;
     }
 }

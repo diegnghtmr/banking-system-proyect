@@ -20,7 +20,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="CashierData.fxml" />
+                                        <fx:include source="cashierData.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -33,7 +33,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="CustomerManagement.fxml" />
+                                        <fx:include source="customerManagement.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -46,7 +46,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="SavingsAccountManagement.fxml" />
+                                        <fx:include source="savingsAccountManagement.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -59,7 +59,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="CheckingAccountManagement.fxml" />
+                                        <fx:include source="checkingAccountManagement.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -72,7 +72,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="LoanManagement.fxml" />
+                                        <fx:include source="loanManagement.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -85,7 +85,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="DepositManagement.fxml" />
+                                        <fx:include source="depositManagement.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -98,7 +98,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="TransferManagement.fxml" />
+                                        <fx:include source="transferManagement.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -111,7 +111,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="WithdrawalManagement.fxml" />
+                                        <fx:include source="withdrawalManagement.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -124,7 +124,7 @@
                             <children>
                                 <SplitPane dividerPositions="0.38166666666666665" prefHeight="510.0" prefWidth="602.0">
                                     <items>
-                                        <fx:include source="MovementManagement.fxml" />
+                                        <fx:include source="movementManagement.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
