@@ -89,7 +89,7 @@ public class SavingsAccountManagementViewController {
     @FXML
     void onNew(ActionEvent event) {
         clearData();
-        deselectCustomerSavingAccount();
+        deselectSavingAccount();
 
 
     }
@@ -177,7 +177,7 @@ public class SavingsAccountManagementViewController {
         return (savingsAccount.getAccountNumber().toLowerCase().contains(searchText.toLowerCase()));
     }
 
-    private void deselectCustomerSavingAccount() {
+    private void deselectSavingAccount() {
         tableManagementAccounts.getSelectionModel().clearSelection();
         selectedSavingsAccount = null;
     }
@@ -213,7 +213,7 @@ public class SavingsAccountManagementViewController {
                     tableManagementAccounts.refresh(); // Refrescar la tabla
                     showMessage("Notificación", "Cuenta de ahorro eliminada", "La cuenta de ahorro ha sido eliminada con éxito", Alert.AlertType.INFORMATION);
                     clearData();
-                    deselectCustomerSavingAccount();
+                    deselectSavingAccount();
                 } else {
                     showMessage("Error", "Eliminación fallida", "No se pudo eliminar la cuenta de ahorro.", Alert.AlertType.ERROR);
                 }

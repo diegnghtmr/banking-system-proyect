@@ -9,7 +9,7 @@ import java.util.List;
 public class CustomerManagementController {
     ModelFactory modelFactory;
 
-    public CustomerManagementController(){
+    public CustomerManagementController() {
         modelFactory = ModelFactory.getInstance();
     }
 

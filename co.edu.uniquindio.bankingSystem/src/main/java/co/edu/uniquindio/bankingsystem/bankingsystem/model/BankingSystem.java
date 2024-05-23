@@ -278,4 +278,43 @@ public class BankingSystem {
         }
         return false;
     }
+
+    public boolean createCheckingAccount(CheckingAccount checkingAccount) {
+        String chekingAccountSave = searchCheckingAccount(checkingAccount.getAccountNumber());
+        if(chekingAccountSave == null ) {
+            checkingAccountList.add(checkingAccount);
+            return true;
+        }
+        return false;
+    }
+
+    private String searchCheckingAccount(String accountNumber) {
+        for (CheckingAccount checkingAccount : getCheckingAccountList()){
+            if(checkingAccount.getAccountNumber().equalsIgnoreCase(accountNumber)){
+                return checkingAccount.toString();
+            }
+        }
+        return null;
+    }
+
+    public boolean updateCheckingAccount(CheckingAccount selectedChekingAccount, CheckingAccount checkingAccountUpdate) {
+        int index = checkingAccountList.indexOf(selectedChekingAccount);
+        if (index != -1) {
+            checkingAccountList.set (index, checkingAccountUpdate);
+            return true;
+
+        }
+        return false;
+    }
+
+    public boolean removeCheckingAccount(CheckingAccount selectedChekingAccount) {
+        if (selectedChekingAccount != null) {
+            int index = checkingAccountList.indexOf(selectedChekingAccount);
+            if (index != -1){
+                checkingAccountList.remove(index);
+                return true;
+            }
+        }
+        return false;
+    }
 }

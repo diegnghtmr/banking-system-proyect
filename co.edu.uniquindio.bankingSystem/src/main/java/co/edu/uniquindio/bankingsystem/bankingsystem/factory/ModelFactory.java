@@ -298,4 +298,20 @@ return bankingSystem.createCashier(cashier);
     public boolean updateSavingAccount(SavingsAccount selectedSavingsAccount, SavingsAccount savingsAccountUpdate) {
         return bankingSystem.updateSavingAccount(selectedSavingsAccount, savingsAccountUpdate);
     }
+
+    public List<CheckingAccount> getCheckingAccountList() {
+        return bankingSystem.getCheckingAccountList();
+    }
+
+    public boolean createCheckingAccount(CheckingAccount checkingAccount) {
+        return bankingSystem.createCheckingAccount(checkingAccount);
+    }
+
+    public boolean updateCheckingAccount(CheckingAccount selectedChekingAccount, CheckingAccount checkingAccountUpdate) {
+        return bankingSystem.updateCheckingAccount(selectedChekingAccount, checkingAccountUpdate);
+    }
+
+    public boolean removeCheckingAccount(CheckingAccount selectedChekingAccount) {
+        return  bankingSystem.removeCheckingAccount(selectedChekingAccount);
+    }
 }
