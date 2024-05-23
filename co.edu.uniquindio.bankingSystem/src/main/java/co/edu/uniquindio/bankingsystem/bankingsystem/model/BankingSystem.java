@@ -238,4 +238,44 @@ public class BankingSystem {
         addEmployeeList(employee);
         return employee;
     }
+
+
+    public boolean createSavingsAccount(SavingsAccount savingsAccount) {
+        String savingsAccountFound = searchSavingsAccount(savingsAccount.getAccountNumber());
+        if (savingsAccountFound == null){
+            savingsAccountList.add(savingsAccount);
+            return true;
+        }
+        return false;
+    }
+
+    private String searchSavingsAccount(String accountNumber) {
+        for (SavingsAccount savingsAccount : getSavingsAccountList()) {
+            if(savingsAccount.getAccountNumber().equalsIgnoreCase(accountNumber)){
+                return savingsAccount.toString();
+            }
+        }
+        return null;
+    }
+
+    public boolean removeSavingAccount(SavingsAccount selectedSavingsAccount) {
+        if (selectedSavingsAccount != null){
+            int index = savingsAccountList.indexOf(selectedSavingsAccount);
+            if (index != -1) {
+                savingsAccountList.remove(index);
+                return true;
+            }
+        }
+        return false;
+
+        }
+
+    public boolean updateSavingAccount(SavingsAccount selectedSavingsAccount, SavingsAccount savingsAccountUpdate) {
+        int index = savingsAccountList.indexOf(selectedSavingsAccount);
+        if (index != -1) {
+            savingsAccountList.set(index, savingsAccountUpdate);
+            return true;
+        }
+        return false;
+    }
 }

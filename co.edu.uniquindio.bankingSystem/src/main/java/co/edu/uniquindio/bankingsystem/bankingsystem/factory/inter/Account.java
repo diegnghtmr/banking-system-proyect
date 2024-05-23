@@ -52,4 +52,20 @@ public abstract class Account {
     public void setCustomer(Customer customer){
         this.customer = customer;
     }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setSecurityNumber(int securityNumber) {
+        this.securityNumber = securityNumber;
+    }
+
+    public void setOpeningDate(LocalDate openingDate) {
+        this.openingDate = openingDate;
+    }
+
+    public void setTransactionList(List<Transaction> transactionList) {
+        this.transactionList = transactionList;
+    }
 }

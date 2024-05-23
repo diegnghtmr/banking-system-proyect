@@ -282,4 +282,20 @@ return bankingSystem.createCashier(cashier);
     public Employee addEmployee(String identification, String name, String email, String address, String password, String phone) {
         return bankingSystem.addEmployee(identification, name, email, address, password, phone);
     }
+
+    public List<SavingsAccount> getSavingAccountList() {
+        return bankingSystem.getSavingsAccountList();
+    }
+
+    public boolean createSavingsAccount(SavingsAccount savingsAccount) {
+        return bankingSystem.createSavingsAccount(savingsAccount);
+    }
+
+    public boolean removeSavingAccount(SavingsAccount selectedSavingsAccount) {
+        return bankingSystem.removeSavingAccount(selectedSavingsAccount);
+    }
+
+    public boolean updateSavingAccount(SavingsAccount selectedSavingsAccount, SavingsAccount savingsAccountUpdate) {
+        return bankingSystem.updateSavingAccount(selectedSavingsAccount, savingsAccountUpdate);
+    }
 }
