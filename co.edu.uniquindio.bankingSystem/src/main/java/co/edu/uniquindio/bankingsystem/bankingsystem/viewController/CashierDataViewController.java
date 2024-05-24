@@ -31,6 +31,14 @@ public class CashierDataViewController {
     private TextField txtPasswordCashier;
 
     @FXML
+    private void initialize() {
+        txtCashierName.setEditable(false);
+        txtEmaiCashier.setEditable(false);
+        txtIdCashier.setEditable(false);
+        txtPasswordCashier.setEditable(false);
+    }
+
+    @FXML
     private void onSignOff() {
         browseWindow("/startup.fxml", "Banco - Inicio");
     }

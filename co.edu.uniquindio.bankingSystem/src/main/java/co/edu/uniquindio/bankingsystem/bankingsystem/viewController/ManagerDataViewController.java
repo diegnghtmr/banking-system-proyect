@@ -31,6 +31,14 @@ public class ManagerDataViewController {
     private TextField txtPasswordManager;
 
     @FXML
+    private void initialize() {
+        txtEmailManager.setEditable(false);
+        txtIdManager.setEditable(false);
+        txtManagerName.setEditable(false);
+        txtPasswordManager.setEditable(false);
+    }
+
+    @FXML
     private void onSignOff() {
         browseWindow("/startup.fxml", "Banco - Inicio");
     }
