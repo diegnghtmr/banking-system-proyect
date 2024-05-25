@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,7 +18,6 @@ public class ManagerDataViewController {
 
     @FXML
     private URL location;
-
     @FXML
     private TextField txtEmailManager;
 
@@ -29,6 +29,7 @@ public class ManagerDataViewController {
 
     @FXML
     private TextField txtPasswordManager;
+
 
     @FXML
     private void initialize() {
