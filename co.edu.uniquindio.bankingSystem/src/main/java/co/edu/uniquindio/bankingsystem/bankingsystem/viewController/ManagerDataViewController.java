@@ -2,11 +2,14 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.viewController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,6 +20,12 @@ public class ManagerDataViewController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private Button btnDashboard;
+
+    @FXML
+    private Button btnSignOff;
 
     @FXML
     private TextField txtEmailManager;
@@ -40,7 +49,12 @@ public class ManagerDataViewController {
 
     @FXML
     private void onSignOff() {
-        browseWindow("/startup.fxml", "Banco - Inicio");
+        browseWindow("/startup.fxml", "App Byte Bank");
+    }
+
+    @FXML
+    void onDashboard(ActionEvent event) {
+            browseWindow("/cashierInterface.fxml", "Banco - Dashboard Gerente");
     }
 
     private void browseWindow(String nameFileFxml, String titleWindow) {
@@ -62,4 +76,10 @@ public class ManagerDataViewController {
         }
     }
 
+    public void setEmployee(Employee employee) {
+        txtManagerName.setText(employee.getName());
+        txtEmailManager.setText(employee.getEmail());
+        txtIdManager.setText(employee.getDNI());
+        txtPasswordManager.setText(employee.getPassword());
+    }
 }

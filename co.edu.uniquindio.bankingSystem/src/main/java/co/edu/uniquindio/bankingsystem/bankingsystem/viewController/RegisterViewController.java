@@ -114,24 +114,22 @@ public class RegisterViewController {
 
     private void goEmployeeDashboard(Employee employeeValidated) {
         if (employeeValidated.getTypeEmployee() == TypeEmployee.MANAGER) {
-            browseWindow("/managerInterface.fxml", "Banco - Panel de Gerente");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/managerData.fxml"));
+            try {
+                Parent root = loader.load();
+                ManagerDataViewController controller = loader.getController();
+                controller.setEmployee(employeeValidated);
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.setTitle("Banco - Panel de Gerente");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             showMessage("Solo los gerentes pueden acceder a este panel", "Error", Alert.AlertType.ERROR);
-        }
-    }
-
-    private void browseWindow(String fileNameFxml, String windowTitle) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fileNameFxml));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle(windowTitle);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

@@ -36,6 +36,7 @@
       <Label layoutX="76.0" layoutY="378.0" prefHeight="17.0" prefWidth="283.0" text=" lección que te acerca más a la meta. No olvides que " />
       <Label layoutX="357.0" layoutY="378.0" text="esto vale la plata. ¡Persiste y triunfarás!&quot;" />
       <Separator layoutX="31.0" layoutY="415.0" prefHeight="3.0" prefWidth="598.0" />
-      <Button layoutX="33.0" layoutY="494.0" mnemonicParsing="false" onAction="#onSignOff" text="Cerrar sesión" />
+      <Button fx:id="btnSignOff" layoutX="33.0" layoutY="494.0" mnemonicParsing="false" onAction="#onSignOff" text="Cerrar sesión" />
+      <Button fx:id="btnDashboard" layoutX="533.0" layoutY="494.0" mnemonicParsing="false" onAction="#onDashboard" text="Ir al Dashboard" />
    </children>
 </AnchorPane>
