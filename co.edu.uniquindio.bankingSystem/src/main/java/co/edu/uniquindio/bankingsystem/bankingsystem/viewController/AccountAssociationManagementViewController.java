@@ -1,6 +1,8 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.viewController;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.controller.AccountAssociationManagementController;
@@ -93,7 +95,6 @@ public class AccountAssociationManagementViewController {
         getAccountAssociationList();
         tblData.getItems().clear();
         tblData.setItems(AccountAssociationList);
-      //  listenerSelection();
     }
 
 
@@ -106,6 +107,27 @@ public class AccountAssociationManagementViewController {
 
     private void getAccountAssociationList() {
         AccountAssociationList.addAll(accountAssociationManagementController.getAccountAssociationList());
+    }
+
+    private void setupFilter() {
+        txtFilter.textProperty().addListener((observable, oldValue, newValue)-> {
+            List<AccountAssociationDto> originalList = accountAssociationManagementController.getAccountAssociationList();
+            ObservableList<AccountAssociationDto> filteredList = filteredList(originalList, newValue);
+            tblData.setItems(filteredList);
+        });
+    }
+
+    private ObservableList<AccountAssociationDto> filteredList(List<AccountAssociationDto> originalList, String searchTest) {
+        List<AccountAssociationDto> filteredList = new ArrayList<>();
+        for(AccountAssociationDto accountAssociationDto: originalList) {
+            if(searchFindsAccountAssociationDto(accountAssociationDto, searchTest)) filteredList.add(accountAssociationDto);
+
+        }
+        return FXCollections.observableList(filteredList);
+    }
+
+    private boolean searchFindsAccountAssociationDto(AccountAssociationDto accountAssociationDto, String searchTest) {
+        return (accountAssociationDto.accountNumber().toLowerCase().contains(searchTest.toLowerCase()));
     }
 
 }

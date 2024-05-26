@@ -243,14 +243,24 @@ public class ModelFactory {
     }
 
     private void initAccountAssociation() {
-        AccountAssociation accountAssociation1 = new AccountAssociation(bankingSystem.getCustomerList().get(0), bankingSystem.getCheckingAccountList().get(0));
+        AccountAssociation accountAssociation1 = new AccountAssociation(bankingSystem.getCustomerList().get(0), bankingSystem.getSavingsAccountList().get(0));
         AccountAssociation accountAssociation2 = new AccountAssociation(bankingSystem.getCustomerList().get(1), bankingSystem.getSavingsAccountList().get(1));
         AccountAssociation accountAssociation3 = new AccountAssociation(bankingSystem.getCustomerList().get(2), bankingSystem.getSavingsAccountList().get(2));
+        AccountAssociation accountAssociation4 = new AccountAssociation(bankingSystem.getCustomerList().get(3), bankingSystem.getSavingsAccountList().get(3));
+        AccountAssociation accountAssociation5 = new AccountAssociation(bankingSystem.getCustomerList().get(4), bankingSystem.getCheckingAccountList().get(0));
+        AccountAssociation accountAssociation6 = new AccountAssociation(bankingSystem.getCustomerList().get(5), bankingSystem.getCheckingAccountList().get(1));
+        AccountAssociation accountAssociation7 = new AccountAssociation(bankingSystem.getCustomerList().get(6), bankingSystem.getCheckingAccountList().get(2));
+
 
 
         bankingSystem.getAccountAssociationList().add(accountAssociation1);
         bankingSystem.getAccountAssociationList().add(accountAssociation2);
         bankingSystem.getAccountAssociationList().add(accountAssociation3);
+        bankingSystem.getAccountAssociationList().add(accountAssociation4);
+        bankingSystem.getAccountAssociationList().add(accountAssociation5);
+        bankingSystem.getAccountAssociationList().add(accountAssociation6);
+        bankingSystem.getAccountAssociationList().add(accountAssociation7);
+
 
     }
 
@@ -348,9 +358,9 @@ return bankingSystem.createCashier(cashier);
     private AccountAssociationDto buildAccountAssociationDto(AccountAssociation accountAssociation) {
         String accountType = "";
         if (accountAssociation.getAccount() instanceof SavingsAccount) {
-            accountType = "Savings";
+            accountType = "Ahorro";
         } else if (accountAssociation.getAccount() instanceof CheckingAccount) {
-            accountType = "Checking";
+            accountType = "Corriente";
         }
 
         return new AccountAssociationDto(
