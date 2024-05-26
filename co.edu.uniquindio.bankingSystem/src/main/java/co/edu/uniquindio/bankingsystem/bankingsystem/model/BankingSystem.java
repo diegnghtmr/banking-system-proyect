@@ -20,6 +20,8 @@ public class BankingSystem {
     private List<Withdrawal> withdrawalList;
     private List<Transfer> transferList;
 
+    private List<AccountAssociation> accountAssociationList;
+
 
     public BankingSystem() {
         this.name = "Byte Bank";
@@ -30,6 +32,7 @@ public class BankingSystem {
         this.depositList = new ArrayList<>();
         this.withdrawalList = new ArrayList<>();
         this.transferList = new ArrayList<>();
+        this.accountAssociationList = new ArrayList<>();
     }
 
     public String getName() {
@@ -62,6 +65,10 @@ public class BankingSystem {
 
     public List<Transfer> getTransferList() {
         return transferList;
+    }
+
+    public List<AccountAssociation> getAccountAssociationList() {
+        return accountAssociationList;
     }
 
     public void addEmployeeList(Employee employee) {

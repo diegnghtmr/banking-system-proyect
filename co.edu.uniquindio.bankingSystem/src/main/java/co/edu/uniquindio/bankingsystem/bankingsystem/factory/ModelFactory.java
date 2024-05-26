@@ -1,11 +1,13 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.factory;
 
+import co.edu.uniquindio.bankingsystem.bankingsystem.dto.AccountAssociationDto;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Transaction;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.CheckingAccount;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Deposit;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.SavingsAccount;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Withdrawal;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.AccountAssociation;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.BankingSystem;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
@@ -14,6 +16,7 @@ import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuild
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactory {
@@ -35,7 +38,11 @@ public class ModelFactory {
     private void initializeData() {
         initCustomer();
         initEmployee();
+        initAccountAssociation();
     }
+
+
+
 
     private void initCustomer() {
         AccountFactory accountFactory = new AccountFactory();
@@ -235,6 +242,18 @@ public class ModelFactory {
         bankingSystem.addEmployeeList(employee5);
     }
 
+    private void initAccountAssociation() {
+        AccountAssociation accountAssociation1 = new AccountAssociation(bankingSystem.getCustomerList().get(0), bankingSystem.getCheckingAccountList().get(0));
+        AccountAssociation accountAssociation2 = new AccountAssociation(bankingSystem.getCustomerList().get(1), bankingSystem.getSavingsAccountList().get(1));
+        AccountAssociation accountAssociation3 = new AccountAssociation(bankingSystem.getCustomerList().get(2), bankingSystem.getSavingsAccountList().get(2));
+
+
+        bankingSystem.getAccountAssociationList().add(accountAssociation1);
+        bankingSystem.getAccountAssociationList().add(accountAssociation2);
+        bankingSystem.getAccountAssociationList().add(accountAssociation3);
+
+    }
+
     public List<Customer> getCustomerList() {
         return bankingSystem.getCustomerList();
     }
@@ -314,4 +333,32 @@ return bankingSystem.createCashier(cashier);
     public boolean removeCheckingAccount(CheckingAccount selectedChekingAccount) {
         return  bankingSystem.removeCheckingAccount(selectedChekingAccount);
     }
+
+    public List<AccountAssociationDto> getAccountAssociationList() {
+        List<AccountAssociation> accountAssociationList = bankingSystem.getAccountAssociationList();
+        List<AccountAssociationDto> accountAssociationDtoList = new ArrayList<>();
+
+        for(AccountAssociation accountAssociation : accountAssociationList) {
+            accountAssociationDtoList.add(buildAccountAssociationDto(accountAssociation));
+        }
+
+        return  accountAssociationDtoList;
+    }
+
+    private AccountAssociationDto buildAccountAssociationDto(AccountAssociation accountAssociation) {
+        String accountType = "";
+        if (accountAssociation.getAccount() instanceof SavingsAccount) {
+            accountType = "Savings";
+        } else if (accountAssociation.getAccount() instanceof CheckingAccount) {
+            accountType = "Checking";
+        }
+
+        return new AccountAssociationDto(
+                accountAssociation.getCustomer().getName(),
+                accountAssociation.getCustomer().getDNI(),
+                accountAssociation.getAccount().getAccountNumber(),
+                accountType
+        );
+    }
+
 }
