@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.bankingsystem.bankingsystem.controller.AccountAssociationManagementController;
 import co.edu.uniquindio.bankingsystem.bankingsystem.dto.AccountAssociationDto;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.AccountAssociation;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -15,11 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class AccountAssociationManagementViewController {
     AccountAssociationManagementController accountAssociationManagementController;
@@ -70,8 +67,10 @@ public class AccountAssociationManagementViewController {
 
     @FXML
     void onAssociate(ActionEvent event) {
+        associateAccount();
 
     }
+
 
     @FXML
     void onCustomers(ActionEvent event) {
@@ -87,6 +86,8 @@ public class AccountAssociationManagementViewController {
     void initialize() {
         accountAssociationManagementController = new AccountAssociationManagementController();
         initView();
+        setupFilter();
+        loadUnassociatedData();
 
     }
 
@@ -110,7 +111,7 @@ public class AccountAssociationManagementViewController {
     }
 
     private void setupFilter() {
-        txtFilter.textProperty().addListener((observable, oldValue, newValue)-> {
+        txtFilter.textProperty().addListener((observable, oldValue, newValue) -> {
             List<AccountAssociationDto> originalList = accountAssociationManagementController.getAccountAssociationList();
             ObservableList<AccountAssociationDto> filteredList = filteredList(originalList, newValue);
             tblData.setItems(filteredList);
@@ -119,8 +120,9 @@ public class AccountAssociationManagementViewController {
 
     private ObservableList<AccountAssociationDto> filteredList(List<AccountAssociationDto> originalList, String searchTest) {
         List<AccountAssociationDto> filteredList = new ArrayList<>();
-        for(AccountAssociationDto accountAssociationDto: originalList) {
-            if(searchFindsAccountAssociationDto(accountAssociationDto, searchTest)) filteredList.add(accountAssociationDto);
+        for (AccountAssociationDto accountAssociationDto : originalList) {
+            if (searchFindsAccountAssociationDto(accountAssociationDto, searchTest))
+                filteredList.add(accountAssociationDto);
 
         }
         return FXCollections.observableList(filteredList);
@@ -130,5 +132,44 @@ public class AccountAssociationManagementViewController {
         return (accountAssociationDto.accountNumber().toLowerCase().contains(searchTest.toLowerCase()));
     }
 
+    private void loadUnassociatedData() {
+        cbCustomers.setItems(FXCollections.observableArrayList(accountAssociationManagementController.getUnassociatedCustomers()));
+        cbAccounts.setItems(FXCollections.observableArrayList(accountAssociationManagementController.getUnassociatedAccounts()));
+    }
+
+    private void associateAccount() {
+        Customer selectedCustomer = cbCustomers.getSelectionModel().getSelectedItem();
+        Account selectedAccount = cbAccounts.getSelectionModel().getSelectedItem();
+
+
+        if (selectedCustomer != null && selectedAccount != null) {
+            AccountAssociation newAssociation = new AccountAssociation(selectedCustomer, selectedAccount);
+            accountAssociationManagementController.addAssociation(newAssociation);
+            refreshTablesAndComboBoxes(); // Actualizar la interfaz de usuario
+
+            // Limpiar selecciones en los ComboBoxes
+            cbCustomers.getSelectionModel().clearSelection();
+            cbAccounts.getSelectionModel().clearSelection();
+        } else {
+            showAlert("Error de selección", "Seleccione un cliente y una cuenta antes de asociar.");
+        }
+    }
+
+    private void refreshTablesAndComboBoxes() {
+        AccountAssociationList.clear(); // Limpiar la lista para evitar duplicados
+        getAccountAssociationList(); // Volver a obtener la lista actualizada de asociaciones
+        tblData.setItems(AccountAssociationList); // Actualizar la tabla
+        loadUnassociatedData();
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
+
+
 
