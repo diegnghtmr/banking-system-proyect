@@ -23,8 +23,8 @@
       <Label layoutX="50.0" layoutY="137.0" text="Cantidad:" />
       <Label layoutX="335.0" layoutY="94.0" text="Número de referencia:" />
       <Label layoutX="335.0" layoutY="137.0" text="Fecha Deposito:" />
-      <ComboBox fx:id="cbAccount" layoutX="120.0" layoutY="90.0" onAction="#onAccount" prefWidth="150.0" />
-      <DatePicker fx:id="dpDepositDate" layoutX="465.0" layoutY="133.0" onAction="#onDepositDate" prefHeight="25.0" prefWidth="149.0" />
+      <ComboBox fx:id="cbAccount" layoutX="120.0" layoutY="90.0" prefWidth="150.0" />
+      <DatePicker fx:id="dpDepositDate" layoutX="465.0" layoutY="133.0" prefHeight="25.0" prefWidth="149.0" />
       <TextField fx:id="txtReferenceNumber" layoutX="465.0" layoutY="90.0" />
       <TextField fx:id="txtAmount" layoutX="121.0" layoutY="133.0" />
       <Button fx:id="btnNew" layoutX="210.0" layoutY="194.0" mnemonicParsing="false" onAction="#onNew" text="Nuevo" />
@@ -33,13 +33,12 @@
          <font>
             <Font name="Cambria" size="12.0" />
          </font></TextField>
-      <TableView fx:id="tblData" layoutX="39.0" layoutY="274.0" prefHeight="251.0" prefWidth="586.0">
+      <TableView fx:id="tableDeposits" layoutX="39.0" layoutY="274.0" prefHeight="251.0" prefWidth="586.0">
         <columns>
           <TableColumn fx:id="tcAccount" prefWidth="108.0" text="Cuenta" />
-          <TableColumn fx:id="tcReferenceNumber" prefWidth="158.0" text="Número de Referencia" />
-            <TableColumn fx:id="tcAmount" prefWidth="90.0" text="Cantidad" />
-            <TableColumn fx:id="tcDepositDate" prefWidth="129.0" text="Fecha Deposito" />
-            <TableColumn fx:id="tcState" prefWidth="100.0" text="Estado" />
+          <TableColumn fx:id="tcReferenceNumber" prefWidth="177.0" text="Número de Referencia" />
+            <TableColumn fx:id="tcAmount" prefWidth="113.0" text="Cantidad" />
+            <TableColumn fx:id="tcDepositDate" prefWidth="187.0" text="Fecha Deposito" />
         </columns>
       </TableView>
       <Separator layoutX="18.0" layoutY="178.0" prefHeight="3.0" prefWidth="627.0" />

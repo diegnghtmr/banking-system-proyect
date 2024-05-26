@@ -1,5 +1,7 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.model;
 
+import co.edu.uniquindio.bankingsystem.bankingsystem.factory.TransactionFactory;
+import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.*;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuilder;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
@@ -316,5 +318,40 @@ public class BankingSystem {
             }
         }
         return false;
+    }
+
+    public List<Deposit> getDeposit() {
+        return depositList;
+    }
+
+    public List<Account> getAccountsList() {
+        List<Account> accountsList = new ArrayList<>();
+        accountsList.addAll(checkingAccountList);
+        accountsList.addAll(savingsAccountList);
+        return accountsList;
+    }
+
+    public Deposit createDepositProduct() {
+        TransactionFactory transactionFactory = new TransactionFactory();
+        return (Deposit) transactionFactory.getTransaction("DEPOSIT");
+    }
+
+    public boolean createDeposit(Deposit deposit) {
+        Deposit depositReference = (Deposit) getDepositReference(deposit.getReferenceNumber());
+
+        if (depositReference == null) {
+            depositList.add(deposit);
+            return true;
+        } else {
+            deposit.setReferenceNumber(deposit.getReferenceNumber() + 1);
+            return createDeposit(deposit); // llamada recursiva
+        }
+    }
+
+    private Object getDepositReference(int referenceNumber) {
+        return depositList.stream()
+                .filter(deposit -> deposit.getReferenceNumber() == referenceNumber)
+                .findFirst()
+                .orElse(null);
     }
 }

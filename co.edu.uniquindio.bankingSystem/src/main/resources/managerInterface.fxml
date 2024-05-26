@@ -94,19 +94,6 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Transacciones">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <SplitPane prefHeight="510.0" prefWidth="602.0">
-                                    <items>
-                                        <fx:include source="transactionManagement.fxml" />
-                                    </items>
-                                </SplitPane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
             </tabs>
         </TabPane>
       <Button fx:id="btnSignOff" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#onSignOff" opacity="0.5" text="←">

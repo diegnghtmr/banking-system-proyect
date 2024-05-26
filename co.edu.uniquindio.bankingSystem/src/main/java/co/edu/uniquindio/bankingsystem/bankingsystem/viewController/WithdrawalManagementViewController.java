@@ -43,9 +43,6 @@ public class WithdrawalManagementViewController {
     private TableColumn<Withdrawal, String> tcReferenceNumber;
 
     @FXML
-    private TableColumn<Withdrawal, String> tcStatus;
-
-    @FXML
     private TableColumn<Withdrawal, String> tcWithdrawalDate;
 
     @FXML
@@ -72,11 +69,6 @@ public class WithdrawalManagementViewController {
 
     @FXML
     void onNew(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onWithdrawalDate(ActionEvent event) {
 
     }
 

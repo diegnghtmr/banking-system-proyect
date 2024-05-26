@@ -57,6 +57,30 @@ public class ModelFactory {
         Transaction transaction6 = transactionFactory.getTransaction("WITHDRAWAL");
         Transaction transaction7 = transactionFactory.getTransaction("DEPOSIT");
 
+        transaction1.setAmount(1000);
+        transaction2.setAmount(500);
+        transaction3.setAmount(2000);
+        transaction4.setAmount(1000);
+        transaction5.setAmount(3000);
+        transaction6.setAmount(1500);
+        transaction7.setAmount(4000);
+
+        transaction1.setDate(LocalDate.now().minusMonths(5));
+        transaction2.setDate(LocalDate.now().minusMonths(1));
+        transaction3.setDate(LocalDate.now().minusMonths(2));
+        transaction4.setDate(LocalDate.now().minusMonths(15));
+        transaction5.setDate(LocalDate.now().minusMonths(9));
+        transaction6.setDate(LocalDate.now().minusMonths(8));
+        transaction7.setDate(LocalDate.now().minusMonths(7));
+
+        transaction1.setAccount(account1);
+        transaction2.setAccount(account2);
+        transaction3.setAccount(account3);
+        transaction4.setAccount(account4);
+        transaction5.setAccount(account5);
+        transaction6.setAccount(account6);
+        transaction7.setAccount(account7);
+
         account1.getTransactionList().add(transaction1);
         account2.getTransactionList().add(transaction2);
         account3.getTransactionList().add(transaction3);
@@ -264,7 +288,7 @@ public class ModelFactory {
     }
 
     public boolean createCashier(Employee cashier) {
-return bankingSystem.createCashier(cashier);
+        return bankingSystem.createCashier(cashier);
     }
 
     public boolean removeCashier(Employee cashierSelected) {
@@ -313,5 +337,25 @@ return bankingSystem.createCashier(cashier);
 
     public boolean removeCheckingAccount(CheckingAccount selectedChekingAccount) {
         return  bankingSystem.removeCheckingAccount(selectedChekingAccount);
+    }
+
+    public List<Deposit> getDepositList() {
+        return bankingSystem.getDepositList();
+    }
+
+    public List<Deposit>getDeposit() {
+        return bankingSystem.getDeposit();
+    }
+
+    public List<Account> getAccountsList() {
+        return bankingSystem.getAccountsList();
+    }
+
+    public Deposit createDepositProduct() {
+        return bankingSystem.createDepositProduct();
+    }
+
+    public boolean createDeposit(Deposit deposit) {
+        return bankingSystem.createDeposit(deposit);
     }
 }

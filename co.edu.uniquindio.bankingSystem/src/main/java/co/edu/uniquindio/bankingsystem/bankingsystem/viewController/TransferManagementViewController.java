@@ -3,14 +3,11 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.viewController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Transfer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class TransferManagementViewController {
     @FXML
@@ -20,7 +17,7 @@ public class TransferManagementViewController {
     private URL location;
 
     @FXML
-    private DatePicker DPDateTransfer;
+    private DatePicker dpDateTransfer;
 
     @FXML
     private TableView<Transfer> TblManagementTransfer;
@@ -30,6 +27,9 @@ public class TransferManagementViewController {
 
     @FXML
     private Button btnNew;
+
+    @FXML
+    private ComboBox<Account> cbAccountOrigin;
 
     @FXML
     private TableColumn<Transfer, String> tbAccountDestination;
@@ -50,9 +50,6 @@ public class TransferManagementViewController {
     private TextField txtAccountDestination;
 
     @FXML
-    private TextField txtAccountOrigin;
-
-    @FXML
     private TextField txtAmount;
 
     @FXML
@@ -60,6 +57,11 @@ public class TransferManagementViewController {
 
     @FXML
     private TextField txtTransferNumber;
+
+    @FXML
+    void onAccountOrigin(ActionEvent event) {
+
+    }
 
     @FXML
     void onAdd(ActionEvent event) {
@@ -70,6 +72,7 @@ public class TransferManagementViewController {
     void onNew(ActionEvent event) {
 
     }
+
 
     @FXML
     void initialize() {
