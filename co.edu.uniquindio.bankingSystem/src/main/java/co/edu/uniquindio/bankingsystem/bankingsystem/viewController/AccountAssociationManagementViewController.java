@@ -26,7 +26,6 @@ public class AccountAssociationManagementViewController {
 
 
 
-
     @FXML
     private ResourceBundle resources;
 

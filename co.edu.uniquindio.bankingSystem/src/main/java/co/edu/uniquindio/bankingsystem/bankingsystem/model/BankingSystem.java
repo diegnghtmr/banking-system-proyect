@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.model;
 
+import co.edu.uniquindio.bankingsystem.bankingsystem.dto.LoanDto;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.*;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuilder;
@@ -20,6 +21,7 @@ public class BankingSystem {
     private List<Deposit> depositList;
     private List<Withdrawal> withdrawalList;
     private List<Transfer> transferList;
+    private List<Loan> loanList;
 
     private List<AccountAssociation> accountAssociationList;
 
@@ -34,6 +36,7 @@ public class BankingSystem {
         this.withdrawalList = new ArrayList<>();
         this.transferList = new ArrayList<>();
         this.accountAssociationList = new ArrayList<>();
+        this.loanList = new ArrayList<>();
     }
 
     public String getName() {
@@ -54,6 +57,10 @@ public class BankingSystem {
 
     public List<SavingsAccount> getSavingsAccountList() {
         return savingsAccountList;
+    }
+
+    public List<Loan> getLoanList() {
+        return loanList;
     }
 
     public List<Deposit> getDepositList() {
@@ -404,4 +411,5 @@ public class BankingSystem {
         }
         return null;
     }
+
 }

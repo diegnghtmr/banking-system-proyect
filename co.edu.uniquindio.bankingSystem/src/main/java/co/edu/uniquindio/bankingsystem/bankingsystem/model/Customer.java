@@ -17,6 +17,8 @@ public class Customer {
     private LocalDate birthDate;
     private LocalDate registrationDate;
 
+
+
     public Customer(String name, String DNI, String address, String email, String phoneNumber,
                     Account associatedAccount, BankingSystem ownByBankingSystem,
                     LocalDate birthDate, LocalDate registrationDate){
@@ -29,6 +31,11 @@ public class Customer {
         this.ownByBankingSystem = ownByBankingSystem;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
+
+    }
+
+    public Customer() {
+
     }
 
     public String getName(){
@@ -66,6 +73,8 @@ public class Customer {
     public LocalDate getRegistrationDate(){
         return registrationDate;
     }
+
+
 
     public void setAssociatedAccount(Account associatedAccount) {
         this.associatedAccount = associatedAccount;

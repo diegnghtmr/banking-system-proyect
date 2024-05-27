@@ -1,16 +1,14 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.factory;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.dto.AccountAssociationDto;
+import co.edu.uniquindio.bankingsystem.bankingsystem.dto.LoanDto;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Transaction;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.CheckingAccount;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Deposit;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.SavingsAccount;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Withdrawal;
-import co.edu.uniquindio.bankingsystem.bankingsystem.model.AccountAssociation;
-import co.edu.uniquindio.bankingsystem.bankingsystem.model.BankingSystem;
-import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
-import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.*;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.CustomerBuilder;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuilder;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
@@ -39,6 +37,7 @@ public class ModelFactory {
         initCustomer();
         initEmployee();
         initAccountAssociation();
+        initLoan();
     }
 
 
@@ -378,6 +377,37 @@ public class ModelFactory {
 
 
     }
+    private void initLoan() {
+        Loan loan1 = new Loan();
+        loan1.setCustomer(bankingSystem.getCustomerList().get(0));
+        loan1.setReferenceNumber("99834547");
+        loan1.setLoanDate(LocalDate.of(2023, 01, 01));
+        loan1.setAmount(1600000);
+
+        Loan loan2 = new Loan();
+        loan2.setCustomer(bankingSystem.getCustomerList().get(2));
+        loan2.setReferenceNumber("99834549");
+        loan2.setLoanDate(LocalDate.of(2023, 3, 1));
+        loan2.setAmount(1800000);
+
+        Loan loan3 = new Loan();
+        loan3.setCustomer(bankingSystem.getCustomerList().get(3));
+        loan3.setReferenceNumber("99834550");
+        loan3.setLoanDate(LocalDate.of(2023, 4, 1));
+        loan3.setAmount(3000000);
+
+        Loan loan4 = new Loan();
+        loan4.setCustomer(bankingSystem.getCustomerList().get(4));
+        loan4.setReferenceNumber("99834551");
+        loan4.setLoanDate(LocalDate.of(2023, 5, 1));
+        loan4.setAmount(1500000);
+
+        bankingSystem.getLoanList().add(loan1);
+        bankingSystem.getLoanList().add(loan2);
+        bankingSystem.getLoanList().add(loan3);
+        bankingSystem.getLoanList().add(loan4);
+
+    }
 
     public List<Customer> getCustomerList() {
         return bankingSystem.getCustomerList();
@@ -513,5 +543,33 @@ return bankingSystem.createCashier(cashier);
 
     public boolean removeAssociation(Customer customer, Account account) {
         return bankingSystem.removeAssociation(customer, account);
+    }
+
+    public List<LoanDto> getLoanList() {
+      List<Loan> loanList = bankingSystem.getLoanList();
+      List<LoanDto> loanDtoList = new ArrayList<>();
+
+      for(Loan loan: loanList) {
+          loanDtoList.add(builLoanDto(loan));
+      }
+      return loanDtoList;
+    }
+
+    private LoanDto builLoanDto(Loan loan) {
+        String state = "";
+        if (loan.getAmount()>2000000){
+            state = "Denegado";
+        } else if (loan.getAmount()>0 && loan.getAmount()<2000000){
+            state = "Aprobado";
+        } else if(loan.getAmount()<0){
+            state = "Denegado";
+
+        }
+        return new LoanDto( loan.getCustomer().getDNI(),
+                loan.getReferenceNumber(),
+                loan.getLoanDate().toString(),
+                loan.getAmount(),
+                state);
+
     }
 }
