@@ -30,11 +30,11 @@
       <Button fx:id="btnAdd" layoutX="429.0" layoutY="252.0" mnemonicParsing="false" onAction="#onAdd" text="Agregar" />
       <TableView fx:id="tableManagementTransfer" layoutX="36.0" layoutY="330.0" prefHeight="191.0" prefWidth="595.0">
         <columns>
-          <TableColumn fx:id="tbAccountOrigin" prefWidth="102.66665649414062" text="Cuenta origen" />
-          <TableColumn fx:id="tbAccountDestination" prefWidth="106.66665649414062" text="Cuenta destino" />
-            <TableColumn fx:id="tbAmount" prefWidth="75.0" text="Cantidad" />
-            <TableColumn fx:id="tbTransferNumber" prefWidth="143.0" text="Número referencia" />
-            <TableColumn fx:id="tbDateTransfer" prefWidth="166.0" text="Fecha transferencia" />
+          <TableColumn fx:id="tcAccountOrigin" prefWidth="102.66665649414062" text="Cuenta origen" />
+          <TableColumn fx:id="tcAccountDestination" prefWidth="106.66665649414062" text="Cuenta destino" />
+            <TableColumn fx:id="tcAmount" prefWidth="75.0" text="Cantidad" />
+            <TableColumn fx:id="tcReferenceNumber" prefWidth="143.0" text="Número referencia" />
+            <TableColumn fx:id="tcDateTransfer" prefWidth="166.0" text="Fecha transferencia" />
         </columns>
       </TableView>
       <ComboBox fx:id="cbAccountOrigin" layoutX="137.0" layoutY="115.0" prefWidth="150.0" />

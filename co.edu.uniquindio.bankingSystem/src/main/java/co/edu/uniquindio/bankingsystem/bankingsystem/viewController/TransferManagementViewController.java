@@ -44,19 +44,19 @@ public class TransferManagementViewController {
     private ComboBox<Account> cbAccountOrigin;
 
     @FXML
-    private TableColumn<Transfer, String> tbAccountDestination;
+    private TableColumn<Transfer, String> tcAccountDestination;
 
     @FXML
-    private TableColumn<Transfer, String> tbAccountOrigin;
+    private TableColumn<Transfer, String> tcAccountOrigin;
 
     @FXML
-    private TableColumn<Transfer, String> tbAmount;
+    private TableColumn<Transfer, String> tcAmount;
 
     @FXML
-    private TableColumn<Transfer, String> tbDateTransfer;
+    private TableColumn<Transfer, String> tcDateTransfer;
 
     @FXML
-    private TableColumn<Transfer, String> tbTransferNumber;
+    private TableColumn<Transfer, String> tcReferenceNumber;
 
     @FXML
     private TextField txtAccountDestination;
@@ -95,11 +95,11 @@ public class TransferManagementViewController {
     }
 
     private void initDataBinding() {
-        tbAccountDestination.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAccountDestination().getAccountNumber()));
-        tbAccountOrigin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAccount().getAccountNumber()));
-        tbAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getAmount())));
-        tbDateTransfer.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getDate())));
-        tbTransferNumber.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getReferenceNumber())));
+        tcAccountDestination.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAccountDestination().getAccountNumber()));
+        tcAccountOrigin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAccount().getAccountNumber()));
+        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getAmount())));
+        tcDateTransfer.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getDate())));
+        tcReferenceNumber.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getReferenceNumber())));
     }
 
     private void getTransferList() {
@@ -122,13 +122,6 @@ public class TransferManagementViewController {
         }
     }
 
-    private boolean searchFindsTransfer(Transfer transfer, String searchText) {
-        String referenceNumber = String.valueOf(transfer.getReferenceNumber());
-        return (transfer.getAccount().getAccountNumber().toLowerCase().contains(searchText.toLowerCase())) ||
-                (transfer.getAccountDestination().getAccountNumber().toLowerCase().contains(searchText.toLowerCase())) ||
-                (referenceNumber.contains(searchText.toLowerCase()));
-    }
-
     private void setupFilter() {
         txtFilter.textProperty().addListener((observable, oldValue, newValue) -> {
             List<Transfer> originalList = transferManagementController.getTransferList();
@@ -143,6 +136,13 @@ public class TransferManagementViewController {
             if (searchFindsTransfer(transfer, searchText)) filteredList.add(transfer);
         }
         return FXCollections.observableList(filteredList);
+    }
+
+    private boolean searchFindsTransfer(Transfer transfer, String searchText) {
+        String referenceNumber = String.valueOf(transfer.getReferenceNumber());
+        return (transfer.getAccount().getAccountNumber().toLowerCase().contains(searchText.toLowerCase())) ||
+                (transfer.getAccountDestination().getAccountNumber().toLowerCase().contains(searchText.toLowerCase())) ||
+                (referenceNumber.contains(searchText.toLowerCase()));
     }
 
     private void uploadAccounts() {
@@ -172,7 +172,6 @@ public class TransferManagementViewController {
                     return account.getAccountNumber();
                 }
             }
-
             @Override
             public Account fromString(String accountNumber) {
                 return cbAccountOrigin.getItems().stream().filter(ap ->
@@ -232,6 +231,5 @@ public class TransferManagementViewController {
         aler.setContentText(content);
         aler.showAndWait();
     }
-
 }
 

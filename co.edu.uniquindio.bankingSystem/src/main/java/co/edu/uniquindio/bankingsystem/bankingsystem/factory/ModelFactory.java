@@ -407,4 +407,16 @@ public class ModelFactory {
     public boolean createTransfer(Transfer transfer) {
         return bankingSystem.createTransfer(transfer);
     }
+
+    public List<Withdrawal> getWithdrawalList() {
+        return bankingSystem.getWithdrawalList();
+    }
+
+    public Withdrawal createWithdrawalProduct() {
+        return bankingSystem.createWithdrawalProduct();
+    }
+
+    public boolean createWithdrawal(Withdrawal withdrawal) {
+        return bankingSystem.createWithdrawal(withdrawal);
+    }
 }

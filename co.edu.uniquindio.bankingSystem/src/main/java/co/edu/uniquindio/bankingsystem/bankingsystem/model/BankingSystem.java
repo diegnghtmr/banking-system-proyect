@@ -385,4 +385,28 @@ public class BankingSystem {
                 .findFirst()
                 .orElse(null);
     }
+
+    public Withdrawal createWithdrawalProduct() {
+        TransactionFactory transactionFactory = new TransactionFactory();
+        return (Withdrawal) transactionFactory.getTransaction("WITHDRAWAL");
+    }
+
+    public boolean createWithdrawal(Withdrawal withdrawal) {
+        Withdrawal withdrawalReference = getWithdrawalReference(withdrawal.getReferenceNumber());
+
+        if (withdrawalReference == null) {
+            withdrawalList.add(withdrawal);
+            return true;
+        } else {
+            withdrawal.setReferenceNumber(withdrawal.getReferenceNumber() + 1);
+            return createWithdrawal(withdrawal); // llamada recursiva
+        }
+    }
+
+    private Withdrawal getWithdrawalReference(int referenceNumber) {
+        return withdrawalList.stream()
+                .filter(withdrawal -> withdrawal.getReferenceNumber() == referenceNumber)
+                .findFirst()
+                .orElse(null);
+    }
 }
