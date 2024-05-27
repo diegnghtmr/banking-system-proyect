@@ -3,6 +3,7 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.viewController;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.controller.AccountAssociationManagementController;
@@ -20,8 +21,10 @@ import javafx.scene.control.*;
 
 public class AccountAssociationManagementViewController {
     AccountAssociationManagementController accountAssociationManagementController;
-    ObservableList<AccountAssociationDto> AccountAssociationList = FXCollections.observableArrayList();
+    ObservableList<AccountAssociationDto> accountAssociationList = FXCollections.observableArrayList();
     FilteredList<AccountAssociationDto> filteredAccountAssociationList;
+
+
 
 
     @FXML
@@ -79,8 +82,10 @@ public class AccountAssociationManagementViewController {
 
     @FXML
     void onDelete(ActionEvent event) {
+        deleteAssociation();
 
     }
+
 
     @FXML
     void initialize() {
@@ -95,7 +100,7 @@ public class AccountAssociationManagementViewController {
         initDataBinding();
         getAccountAssociationList();
         tblData.getItems().clear();
-        tblData.setItems(AccountAssociationList);
+        tblData.setItems(accountAssociationList);
     }
 
 
@@ -107,7 +112,7 @@ public class AccountAssociationManagementViewController {
     }
 
     private void getAccountAssociationList() {
-        AccountAssociationList.addAll(accountAssociationManagementController.getAccountAssociationList());
+        accountAssociationList.addAll(accountAssociationManagementController.getAccountAssociationList());
     }
 
     private void setupFilter() {
@@ -129,7 +134,7 @@ public class AccountAssociationManagementViewController {
     }
 
     private boolean searchFindsAccountAssociationDto(AccountAssociationDto accountAssociationDto, String searchTest) {
-        return (accountAssociationDto.accountNumber().toLowerCase().contains(searchTest.toLowerCase()));
+        return (accountAssociationDto.accountNumber().toLowerCase().contains(searchTest.toLowerCase())) || (accountAssociationDto.dni().toLowerCase().contains(searchTest.toLowerCase()));
     }
 
     private void loadUnassociatedData() {
@@ -146,29 +151,70 @@ public class AccountAssociationManagementViewController {
             AccountAssociation newAssociation = new AccountAssociation(selectedCustomer, selectedAccount);
             accountAssociationManagementController.addAssociation(newAssociation);
             refreshTablesAndComboBoxes(); // Actualizar la interfaz de usuario
-
             // Limpiar selecciones en los ComboBoxes
             cbCustomers.getSelectionModel().clearSelection();
             cbAccounts.getSelectionModel().clearSelection();
         } else {
-            showAlert("Error de selección", "Seleccione un cliente y una cuenta antes de asociar.");
+            showAlert("Error de selección", "Seleccione un cliente y una cuenta antes de asociar.", Alert.AlertType.ERROR);
         }
     }
 
+
+    private void deleteAssociation() {
+        AccountAssociationDto selectedAssociation = tblData.getSelectionModel().getSelectedItem();
+        if (selectedAssociation != null) {
+            if (showConfirmationMessage("¿Está seguro de eliminar esta asociación?")) {
+                String dni = selectedAssociation.dni();
+                String accountNumber = selectedAssociation.accountNumber();
+                Customer customer = accountAssociationManagementController.getCustomerByDni(dni);
+                Account account = accountAssociationManagementController.getAccountByNumber(accountNumber);
+                if (customer != null) {
+                    if (accountAssociationManagementController.removeAssociation(customer, account)) {
+                        accountAssociationList.remove(selectedAssociation);
+                        tblData.refresh();
+                        showAlert("Notificación", "La asociación ha sido eliminada con éxito", Alert.AlertType.INFORMATION);
+                        refreshTablesAndComboBoxes();
+                    } else {
+                        showAlert("Error", "No se pudo eliminar la asociación.", Alert.AlertType.ERROR);
+                    }
+                }
+            }
+        } else {
+            showAlert("Advertencia",  "Debe seleccionar una asociación para eliminar", Alert.AlertType.WARNING);
+        }
+    }
+
+
+
+
     private void refreshTablesAndComboBoxes() {
-        AccountAssociationList.clear(); // Limpiar la lista para evitar duplicados
+        accountAssociationList.clear(); // Limpiar la lista para evitar duplicados
         getAccountAssociationList(); // Volver a obtener la lista actualizada de asociaciones
-        tblData.setItems(AccountAssociationList); // Actualizar la tabla
+        tblData.setItems(accountAssociationList); // Actualizar la tabla
         loadUnassociatedData();
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private boolean showConfirmationMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Confirmación");
+        alert.setContentText(message);
+        Optional<ButtonType> action = alert.showAndWait();
+        if (action.get() == ButtonType.OK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 

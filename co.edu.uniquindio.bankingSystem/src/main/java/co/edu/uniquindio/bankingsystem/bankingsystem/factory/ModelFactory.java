@@ -59,6 +59,10 @@ public class ModelFactory {
         Account account9 = accountFactory.getAccount("SAVINGS");
         Account account10 = accountFactory.getAccount("CHECKING");
         Account account11 = accountFactory.getAccount("SAVINGS");
+        Account account12 = accountFactory.getAccount("CHECKING");
+        Account account13 = accountFactory.getAccount("SAVINGS");
+        Account account14 = accountFactory.getAccount("CHECKING");
+
 
         Transaction transaction1 = transactionFactory.getTransaction("DEPOSIT");
         Transaction transaction2 = transactionFactory.getTransaction("WITHDRAWAL");
@@ -193,6 +197,67 @@ public class ModelFactory {
                 .setRegistrationDate(LocalDate.now().minusMonths(6))
                 .build();
 
+        Customer customer10 = new CustomerBuilder()
+                .setName("José Martínez")
+                .setDNI("999000112")
+                .setAdress("123 Avenida Central")
+                .setEmail("jose.martinez@example.com")
+                .setPhoneNumber("999-000-1122")
+                .setAssociatedAccount(account10)
+                .setOwnByBankingSystem(bankingSystem)
+                .setBirthDate(LocalDate.of(1987, 5, 17))
+                .setRegistrationDate(LocalDate.now().minusMonths(5))
+                .build();
+
+        Customer customer11 = new CustomerBuilder()
+                .setName("María López")
+                .setDNI("999000113")
+                .setAdress("456 Calle de la Rosa")
+                .setEmail("maria.lopez@example.com")
+                .setPhoneNumber("999-000-1133")
+                .setAssociatedAccount(account11)
+                .setOwnByBankingSystem(bankingSystem)
+                .setBirthDate(LocalDate.of(1990, 7, 23))
+                .setRegistrationDate(LocalDate.now().minusMonths(7))
+                .build();
+
+        Customer customer12 = new CustomerBuilder()
+                .setName("Carlos García")
+                .setDNI("999000114")
+                .setAdress("789 Plaza Mayor")
+                .setEmail("carlos.garcia@example.com")
+                .setPhoneNumber("999-000-1144")
+                .setAssociatedAccount(account12)
+                .setOwnByBankingSystem(bankingSystem)
+                .setBirthDate(LocalDate.of(1985, 9, 30))
+                .setRegistrationDate(LocalDate.now().minusMonths(3))
+                .build();
+
+        Customer customer13 = new CustomerBuilder()
+                .setName("Ana Fernández")
+                .setDNI("999000115")
+                .setAdress("321 Camino Real")
+                .setEmail("ana.fernandez@example.com")
+                .setPhoneNumber("999-000-1155")
+                .setAssociatedAccount(account13)
+                .setOwnByBankingSystem(bankingSystem)
+                .setBirthDate(LocalDate.of(1992, 11, 12))
+                .setRegistrationDate(LocalDate.now().minusMonths(9))
+                .build();
+
+        Customer customer14 = new CustomerBuilder()
+                .setName("Luis Rodríguez")
+                .setDNI("999000116")
+                .setAdress("654 Avenida del Sol")
+                .setEmail("luis.rodriguez@example.com")
+                .setPhoneNumber("999-000-1166")
+                .setAssociatedAccount(account14)
+                .setOwnByBankingSystem(bankingSystem)
+                .setBirthDate(LocalDate.of(1980, 1, 5))
+                .setRegistrationDate(LocalDate.now().minusMonths(2))
+                .build();
+
+
         bankingSystem.addSavingsAccountList((SavingsAccount) account1);
         bankingSystem.addCheckingAccountList((CheckingAccount) account2);
         bankingSystem.addSavingsAccountList((SavingsAccount) account3);
@@ -204,6 +269,9 @@ public class ModelFactory {
         bankingSystem.addSavingsAccountList((SavingsAccount) account9);
         bankingSystem.addCheckingAccountList((CheckingAccount)account10);
         bankingSystem.addSavingsAccountList((SavingsAccount) account11);
+        bankingSystem.addCheckingAccountList((CheckingAccount)account12);
+        bankingSystem.addSavingsAccountList((SavingsAccount) account13);
+        bankingSystem.addCheckingAccountList((CheckingAccount)account14);
         bankingSystem.addDepositList((Deposit) transaction1);
         bankingSystem.addWithdrawalList((Withdrawal) transaction2);
         bankingSystem.addDepositList((Deposit) transaction3);
@@ -220,6 +288,11 @@ public class ModelFactory {
         bankingSystem.addCustomerList(customer7);
         bankingSystem.addCustomerList(customer8);
         bankingSystem.addCustomerList(customer9);
+        bankingSystem.addCustomerList(customer10);
+        bankingSystem.addCustomerList(customer11);
+        bankingSystem.addCustomerList(customer12);
+        bankingSystem.addCustomerList(customer13);
+        bankingSystem.addCustomerList(customer14);
     }
 
     private void initEmployee() {
@@ -414,51 +487,31 @@ return bankingSystem.createCashier(cashier);
     }
 
     public List<Customer> getUnassociatedCustomers() {
-        List<Customer> unassociatedCustomers = new ArrayList<>();
-        for (Customer customer : bankingSystem.getCustomerList()) {
-            if (!isCustomerAssociated(customer)) {
-                unassociatedCustomers.add(customer);
-            }
-        }
-        return unassociatedCustomers;
+       return bankingSystem.getUnassociatedCustomers();
     }
 
-    private boolean isCustomerAssociated(Customer customer) {
-        for (AccountAssociation association : bankingSystem.getAccountAssociationList()) {
-            if (association.getCustomer().equals(customer)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
 
     public List<Account> getUnassociatedAccounts() {
-        List<Account> unassociatedAccounts = new ArrayList<>();
-        for (SavingsAccount savingsAccount : bankingSystem.getSavingsAccountList()) {
-            if (!isAccountAssociated(savingsAccount)) {
-                unassociatedAccounts.add(savingsAccount);
-            }
-        }
-        for (CheckingAccount checkingAccount : bankingSystem.getCheckingAccountList()) {
-            if (!isAccountAssociated(checkingAccount)) {
-                unassociatedAccounts.add(checkingAccount);
-            }
-        }
-        return unassociatedAccounts;
+       return bankingSystem.getUnassociatedAccounts();
     }
 
-    private boolean isAccountAssociated(Account account) {
-        for (AccountAssociation association : bankingSystem.getAccountAssociationList()) {
-            if (association.getAccount().equals(account)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void addAssociation(AccountAssociation newAssociation) {
-        bankingSystem.getAccountAssociationList().add(newAssociation);
-        newAssociation.getCustomer().setAssociatedAccount(newAssociation.getAccount());
+        bankingSystem.addAssociation(newAssociation);
+    }
+
+
+    public Customer getCustomerByDni(String dni) {
+       return bankingSystem.getCustomerByDni(dni);
+    }
+
+    public Account getAccountByNumber(String accountNumber) {
+        return bankingSystem.getAccountByNumber(accountNumber);
+    }
+
+    public boolean removeAssociation(Customer customer, Account account) {
+        return bankingSystem.removeAssociation(customer, account);
     }
 }

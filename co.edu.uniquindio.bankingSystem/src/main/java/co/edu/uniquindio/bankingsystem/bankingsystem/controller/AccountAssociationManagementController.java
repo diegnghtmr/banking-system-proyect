@@ -32,4 +32,17 @@ public class AccountAssociationManagementController {
     public void addAssociation(AccountAssociation newAssociation) {
         modelFactory.addAssociation(newAssociation);
     }
+
+
+    public Customer getCustomerByDni(String dni) {
+        return modelFactory.getCustomerByDni(dni);
+    }
+
+    public Account getAccountByNumber(String accountNumber) {
+        return modelFactory.getAccountByNumber(accountNumber);
+    }
+
+    public boolean removeAssociation(Customer customer, Account account) {
+        return modelFactory.removeAssociation(customer, account);
+    }
 }

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.model;
 
+import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.*;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuilder;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
@@ -197,9 +198,9 @@ public class BankingSystem {
 
     private Employee getEmployee(String dni) {
         return getEmployeeList().stream()
-                        .filter(employee -> employee.getDNI().equalsIgnoreCase(dni))
-                        .findFirst()
-                        .orElse(null);
+                .filter(employee -> employee.getDNI().equalsIgnoreCase(dni))
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean removeCashier(Employee cashierSelected) {
@@ -249,7 +250,7 @@ public class BankingSystem {
 
     public boolean createSavingsAccount(SavingsAccount savingsAccount) {
         String savingsAccountFound = searchSavingsAccount(savingsAccount.getAccountNumber());
-        if (savingsAccountFound == null){
+        if (savingsAccountFound == null) {
             savingsAccountList.add(savingsAccount);
             return true;
         }
@@ -258,7 +259,7 @@ public class BankingSystem {
 
     private String searchSavingsAccount(String accountNumber) {
         for (SavingsAccount savingsAccount : getSavingsAccountList()) {
-            if(savingsAccount.getAccountNumber().equalsIgnoreCase(accountNumber)){
+            if (savingsAccount.getAccountNumber().equalsIgnoreCase(accountNumber)) {
                 return savingsAccount.toString();
             }
         }
@@ -266,7 +267,7 @@ public class BankingSystem {
     }
 
     public boolean removeSavingAccount(SavingsAccount selectedSavingsAccount) {
-        if (selectedSavingsAccount != null){
+        if (selectedSavingsAccount != null) {
             int index = savingsAccountList.indexOf(selectedSavingsAccount);
             if (index != -1) {
                 savingsAccountList.remove(index);
@@ -275,7 +276,7 @@ public class BankingSystem {
         }
         return false;
 
-        }
+    }
 
     public boolean updateSavingAccount(SavingsAccount selectedSavingsAccount, SavingsAccount savingsAccountUpdate) {
         int index = savingsAccountList.indexOf(selectedSavingsAccount);
@@ -288,7 +289,7 @@ public class BankingSystem {
 
     public boolean createCheckingAccount(CheckingAccount checkingAccount) {
         String chekingAccountSave = searchCheckingAccount(checkingAccount.getAccountNumber());
-        if(chekingAccountSave == null ) {
+        if (chekingAccountSave == null) {
             checkingAccountList.add(checkingAccount);
             return true;
         }
@@ -296,8 +297,8 @@ public class BankingSystem {
     }
 
     private String searchCheckingAccount(String accountNumber) {
-        for (CheckingAccount checkingAccount : getCheckingAccountList()){
-            if(checkingAccount.getAccountNumber().equalsIgnoreCase(accountNumber)){
+        for (CheckingAccount checkingAccount : getCheckingAccountList()) {
+            if (checkingAccount.getAccountNumber().equalsIgnoreCase(accountNumber)) {
                 return checkingAccount.toString();
             }
         }
@@ -307,7 +308,7 @@ public class BankingSystem {
     public boolean updateCheckingAccount(CheckingAccount selectedChekingAccount, CheckingAccount checkingAccountUpdate) {
         int index = checkingAccountList.indexOf(selectedChekingAccount);
         if (index != -1) {
-            checkingAccountList.set (index, checkingAccountUpdate);
+            checkingAccountList.set(index, checkingAccountUpdate);
             return true;
 
         }
@@ -317,11 +318,90 @@ public class BankingSystem {
     public boolean removeCheckingAccount(CheckingAccount selectedChekingAccount) {
         if (selectedChekingAccount != null) {
             int index = checkingAccountList.indexOf(selectedChekingAccount);
-            if (index != -1){
+            if (index != -1) {
                 checkingAccountList.remove(index);
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean isAccountAssociated(Account account) {
+        for (AccountAssociation accountAssociation : getAccountAssociationList()) {
+            if (accountAssociation.getAccount().equals(account)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Account> getUnassociatedAccounts() {
+        List<Account> unassociatedAccounts = new ArrayList<>();
+        for (SavingsAccount savingsAccount : getSavingsAccountList()) {
+            if (!isAccountAssociated(savingsAccount)) {
+                unassociatedAccounts.add(savingsAccount);
+            }
+        }
+        for (CheckingAccount checkingAccount : getCheckingAccountList()) {
+            if (!isAccountAssociated(checkingAccount)) {
+                unassociatedAccounts.add(checkingAccount);
+            }
+        }
+        return unassociatedAccounts;
+    }
+
+    public List<Customer> getUnassociatedCustomers() {
+        List<Customer> unassociatedCustomers = new ArrayList<>();
+        for (Customer customer : getCustomerList()) {
+            if (!isCustomerAssociated(customer)) {
+                unassociatedCustomers.add(customer);
+            }
+        }
+        return unassociatedCustomers;
+    }
+
+    private boolean isCustomerAssociated(Customer customer) {
+        for (AccountAssociation association : getAccountAssociationList()) {
+            if (association.getCustomer().equals(customer)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public void addAssociation(AccountAssociation newAssociation) {
+        getAccountAssociationList().add(newAssociation);
+        newAssociation.getCustomer().setAssociatedAccount(newAssociation.getAccount());
+    }
+
+
+    public boolean removeAssociation(Customer customer, Account account) {
+        for (int i = 0; i < getAccountAssociationList().size(); i++) {
+            AccountAssociation association = getAccountAssociationList().get(i);
+            if (association.getCustomer().getDNI().equals(customer.getDNI()) && association.getAccount().getAccountNumber().equals(account.getAccountNumber())) {
+                getAccountAssociationList().remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Customer getCustomerByDni(String dni) {
+        for (AccountAssociation association : getAccountAssociationList()) {
+            if (association.getCustomer().getDNI().equals(dni)) {
+                return association.getCustomer();
+            }
+        }
+        return null;
+    }
+
+    public Account getAccountByNumber(String accountNumber) {
+        for (AccountAssociation association : getAccountAssociationList()) {
+            if (association.getAccount().getAccountNumber().equals(accountNumber)) {
+                return association.getAccount();
+            }
+        }
+        return null;
     }
 }
