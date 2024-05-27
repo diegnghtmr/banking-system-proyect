@@ -197,6 +197,7 @@ public class SavingsAccountManagementViewController {
                 tableManagementAccounts.refresh(); // Refrescar la tabla
                 showMessage("Notificación cuenta de ahorro", "Cuenta de ahorro creada", "La cuenta de ahorro ha sido creada con éxito", Alert.AlertType.INFORMATION);
                 clearData();
+                deselectSavingAccount();
             } else {
                 showMessage("Error", "Creación fallida", "No se pudo crear la cuenta de ahorro.", Alert.AlertType.ERROR);
             }

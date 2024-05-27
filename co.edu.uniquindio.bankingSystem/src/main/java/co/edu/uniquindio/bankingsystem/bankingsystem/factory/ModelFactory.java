@@ -2,10 +2,7 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.factory;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Transaction;
-import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.CheckingAccount;
-import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Deposit;
-import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.SavingsAccount;
-import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Withdrawal;
+import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.*;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.BankingSystem;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
@@ -56,14 +53,24 @@ public class ModelFactory {
         Transaction transaction5 = transactionFactory.getTransaction("DEPOSIT");
         Transaction transaction6 = transactionFactory.getTransaction("WITHDRAWAL");
         Transaction transaction7 = transactionFactory.getTransaction("DEPOSIT");
+        Transaction transaction8 = transactionFactory.getTransaction("TRANSFER");
+        Transaction transaction9 = transactionFactory.getTransaction("TRANSFER");
+        Transaction transaction10 = transactionFactory.getTransaction("TRANSFER");
+        Transaction transaction11 = transactionFactory.getTransaction("TRANSFER");
+        Transaction transaction12 = transactionFactory.getTransaction("TRANSFER");
 
-        transaction1.setAmount(1000);
-        transaction2.setAmount(500);
-        transaction3.setAmount(2000);
-        transaction4.setAmount(1000);
-        transaction5.setAmount(3000);
-        transaction6.setAmount(1500);
-        transaction7.setAmount(4000);
+        transaction1.setAmount(10500);
+        transaction2.setAmount(5006687);
+        transaction3.setAmount(20006);
+        transaction4.setAmount(1000000);
+        transaction5.setAmount(300088);
+        transaction6.setAmount(150077);
+        transaction7.setAmount(400077);
+        transaction8.setAmount(5000);
+        transaction9.setAmount(200054);
+        transaction10.setAmount(1090000);
+        transaction11.setAmount(300076);
+        transaction12.setAmount(150000);
 
         transaction1.setDate(LocalDate.now().minusMonths(5));
         transaction2.setDate(LocalDate.now().minusMonths(1));
@@ -72,6 +79,11 @@ public class ModelFactory {
         transaction5.setDate(LocalDate.now().minusMonths(9));
         transaction6.setDate(LocalDate.now().minusMonths(8));
         transaction7.setDate(LocalDate.now().minusMonths(7));
+        transaction8.setDate(LocalDate.now().minusMonths(6));
+        transaction9.setDate(LocalDate.now().minusMonths(5));
+        transaction10.setDate(LocalDate.now().minusMonths(4));
+        transaction11.setDate(LocalDate.now().minusMonths(3));
+        transaction12.setDate(LocalDate.now().minusMonths(2));
 
         transaction1.setAccount(account1);
         transaction2.setAccount(account2);
@@ -80,6 +92,17 @@ public class ModelFactory {
         transaction5.setAccount(account5);
         transaction6.setAccount(account6);
         transaction7.setAccount(account7);
+        transaction8.setAccount(account1);
+        transaction9.setAccount(account2);
+        transaction10.setAccount(account3);
+        transaction11.setAccount(account4);
+        transaction12.setAccount(account5);
+
+        ((Transfer) transaction8).setAccountDestination(account6);
+        ((Transfer) transaction9).setAccountDestination(account7);
+        ((Transfer) transaction10).setAccountDestination(account7);
+        ((Transfer) transaction11).setAccountDestination(account1);
+        ((Transfer) transaction12).setAccountDestination(account2);
 
         account1.getTransactionList().add(transaction1);
         account2.getTransactionList().add(transaction2);
@@ -88,6 +111,11 @@ public class ModelFactory {
         account5.getTransactionList().add(transaction5);
         account6.getTransactionList().add(transaction6);
         account7.getTransactionList().add(transaction7);
+        account1.getTransactionList().add(transaction8);
+        account2.getTransactionList().add(transaction9);
+        account3.getTransactionList().add(transaction10);
+        account4.getTransactionList().add(transaction11);
+        account5.getTransactionList().add(transaction12);
 
         Customer customer1 = new CustomerBuilder()
                 .setName("John Doe")
@@ -187,6 +215,11 @@ public class ModelFactory {
         bankingSystem.addDepositList((Deposit) transaction5);
         bankingSystem.addWithdrawalList((Withdrawal) transaction6);
         bankingSystem.addDepositList((Deposit) transaction7);
+        bankingSystem.addTransferList((Transfer) transaction8);
+        bankingSystem.addTransferList((Transfer) transaction9);
+        bankingSystem.addTransferList((Transfer) transaction10);
+        bankingSystem.addTransferList((Transfer) transaction11);
+        bankingSystem.addTransferList((Transfer) transaction12);
         bankingSystem.addCustomerList(customer1);
         bankingSystem.addCustomerList(customer2);
         bankingSystem.addCustomerList(customer3);
@@ -357,5 +390,21 @@ public class ModelFactory {
 
     public boolean createDeposit(Deposit deposit) {
         return bankingSystem.createDeposit(deposit);
+    }
+
+    public List<Transfer> getTransferList() {
+        return bankingSystem.getTransferList();
+    }
+
+    public Account getAccountByAccountNumber(String accountDestination) {
+        return bankingSystem.getAccountByAccountNumber(accountDestination);
+    }
+
+    public Transfer createTransferProduct() {
+        return bankingSystem.createTransferProduct();
+    }
+
+    public boolean createTransfer(Transfer transfer) {
+        return bankingSystem.createTransfer(transfer);
     }
 }

@@ -337,7 +337,7 @@ public class BankingSystem {
     }
 
     public boolean createDeposit(Deposit deposit) {
-        Deposit depositReference = (Deposit) getDepositReference(deposit.getReferenceNumber());
+        Deposit depositReference = getDepositReference(deposit.getReferenceNumber());
 
         if (depositReference == null) {
             depositList.add(deposit);
@@ -348,9 +348,40 @@ public class BankingSystem {
         }
     }
 
-    private Object getDepositReference(int referenceNumber) {
+    private Deposit getDepositReference(int referenceNumber) {
         return depositList.stream()
                 .filter(deposit -> deposit.getReferenceNumber() == referenceNumber)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Account getAccountByAccountNumber(String accountDestination) {
+        return getAccountsList().stream()
+                .filter(account -> account.getAccountNumber().equalsIgnoreCase(accountDestination))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Transfer createTransferProduct() {
+        TransactionFactory transactionFactory = new TransactionFactory();
+        return (Transfer) transactionFactory.getTransaction("TRANSFER");
+    }
+
+    public boolean createTransfer(Transfer transfer) {
+        Transfer transferReference = getTransferReference(transfer.getReferenceNumber());
+
+        if (transferReference == null) {
+            transferList.add(transfer);
+            return true;
+        } else {
+            transfer.setReferenceNumber(transfer.getReferenceNumber() + 1);
+            return createTransfer(transfer); // llamada recursiva
+        }
+    }
+
+    private Transfer getTransferReference(int referenceNumber) {
+        return transferList.stream()
+                .filter(transfer -> transfer.getReferenceNumber() == referenceNumber)
                 .findFirst()
                 .orElse(null);
     }

@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.bankingsystem.bankingsystem.controller.DepositManagementController;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.Deposit;
-import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,10 +42,7 @@ public class DepositManagementViewController {
     private ComboBox<Account> cbAccount;
 
     @FXML
-    private DatePicker dpDepositDate;
-
-    @FXML
-    private TableView<Deposit> tableDeposits;
+    private TableView<Deposit> tableManagementDeposit;
 
     @FXML
     private TableColumn<Deposit, String> tcAccount;
@@ -67,9 +63,6 @@ public class DepositManagementViewController {
     private TextField txtFilter;
 
     @FXML
-    private TextField txtReferenceNumber;
-
-    @FXML
     void onAdd(ActionEvent event) {
         addDeposit();
     }
@@ -77,7 +70,7 @@ public class DepositManagementViewController {
     @FXML
     void onNew(ActionEvent event) {
         clearData();
-        deselectCashier();
+        deselectDeposit();
     }
 
     @FXML
@@ -91,8 +84,8 @@ public class DepositManagementViewController {
     private void initView() {
         initDataBinding();
         getDepositList();
-        tableDeposits.getItems().clear();
-        tableDeposits.setItems(filteredDepositList);
+        tableManagementDeposit.getItems().clear();
+        tableManagementDeposit.setItems(filteredDepositList);
         listenerSelection();
     }
 
@@ -112,14 +105,14 @@ public class DepositManagementViewController {
         txtFilter.textProperty().addListener((observable, oldValue, newValue) -> {
             List<Deposit> originalList = depositManagementController.getDepositList();
             ObservableList<Deposit> filteredList = filterList(originalList, newValue);
-            tableDeposits.setItems(filteredList);
-        });    }
+            tableManagementDeposit.setItems(filteredList);
+        });
+    }
 
     private ObservableList<Deposit> filterList(List<Deposit> originalList, String searchText) {
         List<Deposit> filteredList = new ArrayList<>();
         for (Deposit deposit : originalList) {
             if (searchFindsDeposit(deposit, searchText)) filteredList.add(deposit);
-
         }
         return FXCollections.observableList(filteredList);
     }
@@ -131,7 +124,7 @@ public class DepositManagementViewController {
     }
 
     private void listenerSelection() {
-        tableDeposits.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        tableManagementDeposit.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             depositSelected = newSelection;
             showInformationDeposit(depositSelected);
         });
@@ -140,8 +133,6 @@ public class DepositManagementViewController {
     private void showInformationDeposit(Deposit depositSelected) {
         if (depositSelected != null) {
             txtAmount.setText(String.valueOf(depositSelected.getAmount()));
-            txtReferenceNumber.setText(String.valueOf(depositSelected.getReferenceNumber()));
-            dpDepositDate.setValue(depositSelected.getDate());
             cbAccount.setValue(depositSelected.getAccount());
         }
     }
@@ -191,8 +182,9 @@ public class DepositManagementViewController {
                 showMessage("Notificación Deposito", "Deposito creado",
                         "El deposito ha sido creado con éxito", Alert.AlertType.INFORMATION);
                 clearData();
+                deselectDeposit();
             } else {
-                showMessage("Error", "Creación fallida",
+                showMessage("Error Deposito", "Creación fallida",
                         "No se pudo crear el deposito.", Alert.AlertType.ERROR);
             }
         } else {
@@ -216,27 +208,12 @@ public class DepositManagementViewController {
 
     private void clearData() {
         txtAmount.setText("");
-        txtReferenceNumber.setText("");
-        dpDepositDate.setValue(null);
         cbAccount.setValue(null);
     }
 
-    private void deselectCashier() {
-        tableDeposits.getSelectionModel().clearSelection();
+    private void deselectDeposit() {
+        tableManagementDeposit.getSelectionModel().clearSelection();
         depositSelected = null;
-    }
-
-    private boolean showConfirmationMessage(String message){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Confirmación");
-        alert.setContentText(message);
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     private void showMessage(String title, String header, String content, Alert.AlertType alertType) {

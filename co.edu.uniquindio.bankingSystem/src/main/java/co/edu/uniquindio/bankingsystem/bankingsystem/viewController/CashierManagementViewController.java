@@ -196,6 +196,7 @@ public class CashierManagementViewController {
                 showMessage("Notificación Cajero", "Cajero creado",
                         "El cajero ha sido creado con éxito", Alert.AlertType.INFORMATION);
                 clearData();
+                deselectCashier();
             } else {
                 showMessage("Error", "Creación fallida",
                         "No se pudo crear el cajero.", Alert.AlertType.ERROR);

@@ -206,6 +206,7 @@ public class CustomerManagementViewController {
                 showMessage("Notificación Cliente", "Cliente creado",
                         "El cliente ha sido creado con éxito", Alert.AlertType.INFORMATION);
                 clearData();
+                deselectCustomer();
             } else {
                 showMessage("Error", "Creación fallida",
                         "No se pudo crear el cliente.", Alert.AlertType.ERROR);

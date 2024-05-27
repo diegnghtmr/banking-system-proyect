@@ -52,17 +52,6 @@ public class WithdrawalManagementViewController {
     private TextField txtFilter;
 
     @FXML
-    private TextField txtReferenceNumber;
-
-    @FXML
-    private DatePicker txtWithdrawalDate;
-
-    @FXML
-    void onAccount(ActionEvent event) {
-
-    }
-
-    @FXML
     void onAdd(ActionEvent event) {
 
     }

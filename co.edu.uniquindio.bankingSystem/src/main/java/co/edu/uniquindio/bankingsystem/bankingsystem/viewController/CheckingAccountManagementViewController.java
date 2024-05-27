@@ -190,6 +190,7 @@ public class CheckingAccountManagementViewController {
                 tableManagementAccounts.refresh();
                 showMessage("Notificación cuenta corriente", "Cuenta corriente creada", "La cuenta corriente ha sido creada con éxito", Alert.AlertType.INFORMATION);
                 clearData();
+                deslectedCheckingAccount();
             } else {
                 showMessage("Error", "Creación fallida", "No se pudo crear la cuenta corriente.", Alert.AlertType.ERROR);
             }

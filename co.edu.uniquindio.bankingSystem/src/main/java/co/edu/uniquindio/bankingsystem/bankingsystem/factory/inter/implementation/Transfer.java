@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 public class Transfer extends Transaction {
     private final double comission;
+    private Account accountDestination;
 
     public Transfer(){
         super();
@@ -15,5 +16,13 @@ public class Transfer extends Transaction {
 
     public double getComission() {
         return comission;
+    }
+
+    public Account getAccountDestination() {
+        return accountDestination;
+    }
+
+    public void setAccountDestination(Account accountDestination) {
+        this.accountDestination = accountDestination;
     }
 }
