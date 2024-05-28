@@ -412,4 +412,43 @@ public class BankingSystem {
         return null;
     }
 
+    public List<Customer> getUnassociatedLoans() {
+        List<Customer> unassociatedCustomerList = new ArrayList<>();
+        for (Customer customer : getCustomerList()) {
+            if (!isCustomerAssociatedLoan(customer)) {
+                unassociatedCustomerList.add(customer);
+
+            }
+
+        }
+        return unassociatedCustomerList;
+    }
+
+    private boolean isCustomerAssociatedLoan(Customer customer) {
+        for (Loan loan : getLoanList()) {
+            if (loan.getCustomer().equals(customer)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+
+    public boolean addLoan(Loan newLoan) {
+        if (newLoan != null && !loanExists(newLoan.getReferenceNumber())) {
+            loanList.add(newLoan);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean loanExists(String referenceNumber) {
+        for (Loan loan : loanList) {
+            if (loan.getReferenceNumber().equalsIgnoreCase(referenceNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

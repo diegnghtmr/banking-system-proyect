@@ -572,4 +572,12 @@ return bankingSystem.createCashier(cashier);
                 state);
 
     }
+
+    public List<Customer> getUnassociatedLoans() {
+        return bankingSystem.getUnassociatedLoans();
+    }
+
+    public boolean addLoan(Loan newLoan) {
+        return bankingSystem.addLoan(newLoan);
+    }
 }
