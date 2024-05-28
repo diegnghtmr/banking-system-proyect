@@ -57,10 +57,6 @@ public class SavingsAccountManagementViewController {
     @FXML
     private TableColumn<SavingsAccount, String> tcOpeningDate;
 
-
-    @FXML
-    private TableColumn<SavingsAccount, String> tcInterestRate;
-
     @FXML
     private TableColumn<SavingsAccount, String> tcSecurityNumber;
 
@@ -74,37 +70,28 @@ public class SavingsAccountManagementViewController {
     private TextField txtFilter;
 
     @FXML
-    private TextField txtInterestRate;
-
-    @FXML
     private TextField txtSecurityNumber;
 
     @FXML
     void onAdd(ActionEvent event) {
         addSavingsAccount();
-
-
     }
 
     @FXML
     void onNew(ActionEvent event) {
         clearData();
         deselectSavingAccount();
-
-
     }
 
 
     @FXML
     void onRemove(ActionEvent event) {
         removeSavingsAccount(selectedSavingsAccount);
-
     }
 
     @FXML
     void onUpdate(ActionEvent event) {
         updateSavingAccount();
-
     }
 
 
@@ -113,7 +100,6 @@ public class SavingsAccountManagementViewController {
         savingsAccountManagementController = new SavingsAccountManagementController();
         initView();
         setupFilter();
-
     }
 
     private void initView() {
@@ -130,8 +116,6 @@ public class SavingsAccountManagementViewController {
         tcBalance.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getBalance())));
         tcSecurityNumber.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getSecurityNumber())));
         tcOpeningDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOpeningDate().toString()));
-        tcInterestRate.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getInterestRate())));
-
     }
 
     private void getSevingsAccountList() {
@@ -152,7 +136,6 @@ public class SavingsAccountManagementViewController {
             txtAccountNumber.setText(selectedSavingsAccount.getAccountNumber());
             txtBalance.setText(String.valueOf(selectedSavingsAccount.getBalance()));
             txtSecurityNumber.setText(String.valueOf(selectedSavingsAccount.getSecurityNumber()));
-            txtInterestRate.setText(String.valueOf(selectedSavingsAccount.getInterestRate()));
         }
     }
 
@@ -186,7 +169,6 @@ public class SavingsAccountManagementViewController {
         txtAccountNumber.setText("");
         txtBalance.setText("");
         txtSecurityNumber.setText("");
-        txtInterestRate.setText("");
     }
 
     private void addSavingsAccount() {
@@ -197,6 +179,7 @@ public class SavingsAccountManagementViewController {
                 tableManagementAccounts.refresh(); // Refrescar la tabla
                 showMessage("Notificación cuenta de ahorro", "Cuenta de ahorro creada", "La cuenta de ahorro ha sido creada con éxito", Alert.AlertType.INFORMATION);
                 clearData();
+                deselectSavingAccount();
             } else {
                 showMessage("Error", "Creación fallida", "No se pudo crear la cuenta de ahorro.", Alert.AlertType.ERROR);
             }
@@ -277,15 +260,13 @@ public class SavingsAccountManagementViewController {
         savingsAccount.setAccountNumber(txtAccountNumber.getText());
         savingsAccount.setOpeningDate(LocalDate.now());
         savingsAccount.setSecurityNumber(Integer.parseInt(txtSecurityNumber.getText()));
-        savingsAccount.setInterestRate(Double.parseDouble(txtInterestRate.getText()));
         return savingsAccount;
     }
 
     private boolean validateForm() {
         return !txtBalance.getText().isEmpty()
                 && !txtSecurityNumber.getText().isEmpty()
-                && !txtAccountNumber.getText().isEmpty()
-                && !txtInterestRate.getText().isEmpty();
+                && !txtAccountNumber.getText().isEmpty();
     }
 
 

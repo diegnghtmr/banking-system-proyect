@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.controller.CashierManagementController;
-import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuilder;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
@@ -101,7 +100,6 @@ public class CashierManagementViewController {
     void onNew(ActionEvent event) {
         clearData();
         deselectCashier();
-
     }
 
     @FXML
@@ -125,7 +123,7 @@ public class CashierManagementViewController {
 
     private void initView() {
         initDataBinding();
-        getcashierList();
+        getCashierList();
         tblCashier.getItems().clear();
         tblCashier.setItems(filteredCashierList);
         listenerSelection();
@@ -141,7 +139,7 @@ public class CashierManagementViewController {
         tcPassword.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
     }
 
-    private void getcashierList() {
+    private void getCashierList() {
         cashierList.addAll(cashierManagementController.getEmployeesList());
         filteredCashierList = new FilteredList<>(cashierList, p -> true);
     }
@@ -198,6 +196,7 @@ public class CashierManagementViewController {
                 showMessage("Notificación Cajero", "Cajero creado",
                         "El cajero ha sido creado con éxito", Alert.AlertType.INFORMATION);
                 clearData();
+                deselectCashier();
             } else {
                 showMessage("Error", "Creación fallida",
                         "No se pudo crear el cajero.", Alert.AlertType.ERROR);

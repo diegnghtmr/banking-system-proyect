@@ -13,10 +13,11 @@ public abstract class Account {
     private Customer customer;
     private List<Transaction> transactionList;
 
-    public Account(){
+    public Account() {
         this.accountNumber = Integer.toString((int) (Math.random() * 90000000 + 10000000));
         this.balance = 0;
-        this.securityNumber = (int) (Math.random() * 99999 + 10000);;
+        this.securityNumber = (int) (Math.random() * 99999 + 10000);
+        ;
         this.openingDate = LocalDate.now();
         this.transactionList = new ArrayList<>();
     }
@@ -37,19 +38,19 @@ public abstract class Account {
         return openingDate;
     }
 
-    public Customer getCustomer(){
+    public Customer getCustomer() {
         return customer;
     }
 
-   public List<Transaction> getTransactionList(){
+    public List<Transaction> getTransactionList() {
         return transactionList;
-   }
+    }
 
-    public void setBalance(double balance){
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public void setCustomer(Customer customer){
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -73,6 +74,4 @@ public abstract class Account {
     public String toString() {
         return getAccountNumber();
     }
-
-
 }

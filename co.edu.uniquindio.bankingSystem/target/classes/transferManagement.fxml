@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -18,29 +18,25 @@
          </font>
       </Label>
       <Separator layoutX="18.0" layoutY="68.0" prefHeight="0.0" prefWidth="629.0" />
-      <Label layoutX="18.0" layoutY="89.0" text="Cuenta Origen: " />
-      <Label layoutX="15.0" layoutY="139.0" text="Cuenta Destino: " />
-      <Label layoutX="18.0" layoutY="192.0" text="Cantidad: " />
-      <TextField fx:id="txtAccountOrigin" layoutX="116.0" layoutY="85.0" promptText="cuenta origen" />
-      <TextField fx:id="txtAccountDestination" layoutX="116.0" layoutY="135.0" promptText="cuenta destino" />
-      <TextField fx:id="txtAmount" layoutX="116.0" layoutY="188.0" promptText="cantidad" />
-      <Label layoutX="333.0" layoutY="89.0" text="Número de referencia: " />
-      <Label layoutX="333.0" layoutY="139.0" text="Fecha de transferencia: " />
-      <TextField fx:id="txtTransferNumber" layoutX="458.0" layoutY="85.0" promptText="número transferencia" />
+      <Label layoutX="39.0" layoutY="119.0" text="Cuenta Origen: " />
+      <Label layoutX="36.0" layoutY="169.0" text="Cuenta Destino: " />
+      <Label layoutX="384.0" layoutY="119.0" text="Cantidad: " />
+      <TextField fx:id="txtAccountDestination" layoutX="137.0" layoutY="165.0" />
+      <TextField fx:id="txtAmount" layoutX="459.0" layoutY="115.0" />
       <Separator layoutX="15.0" layoutY="237.0" prefHeight="3.0" prefWidth="629.0" />
       <Label layoutX="316.0" layoutY="257.0" />
-      <TextField fx:id="txtFilterTransfer" layoutX="176.0" layoutY="290.0" prefHeight="25.0" prefWidth="306.0" promptText="                                        filtrar" />
-      <DatePicker fx:id="DPDateTransfer" layoutX="458.0" layoutY="135.0" prefHeight="25.0" prefWidth="149.0" promptText="fecha transferencia" />
+      <TextField fx:id="txtFilter" alignment="CENTER" layoutX="134.0" layoutY="290.0" prefHeight="25.0" prefWidth="392.0" promptText="Filtrar" />
       <Button fx:id="btnNew" layoutX="176.0" layoutY="252.0" mnemonicParsing="false" onAction="#onNew" text="Nuevo" />
-      <Button fx:id="btnAdd" layoutX="425.0" layoutY="252.0" mnemonicParsing="false" onAction="#onAdd" text="Agregar" />
-      <TableView fx:id="TblManagementTransfer" layoutX="36.0" layoutY="330.0" prefHeight="191.0" prefWidth="595.0">
+      <Button fx:id="btnAdd" layoutX="429.0" layoutY="252.0" mnemonicParsing="false" onAction="#onAdd" text="Agregar" />
+      <TableView fx:id="tableManagementTransfer" layoutX="36.0" layoutY="330.0" prefHeight="191.0" prefWidth="595.0">
         <columns>
-          <TableColumn fx:id="tbAccountOrigin" prefWidth="102.66665649414062" text="Cuenta origen" />
-          <TableColumn fx:id="tbAccountDestination" prefWidth="106.66665649414062" text="Cuenta destino" />
-            <TableColumn fx:id="tbAmount" prefWidth="75.0" text="Cantidad" />
-            <TableColumn fx:id="tbTransferNumber" prefWidth="143.0" text="Número referencia" />
-            <TableColumn fx:id="tbDateTransfer" prefWidth="166.0" text="Fecha transferencia" />
+          <TableColumn fx:id="tcAccountOrigin" prefWidth="102.66665649414062" text="Cuenta origen" />
+          <TableColumn fx:id="tcAccountDestination" prefWidth="106.66665649414062" text="Cuenta destino" />
+            <TableColumn fx:id="tcAmount" prefWidth="75.0" text="Cantidad" />
+            <TableColumn fx:id="tcReferenceNumber" prefWidth="143.0" text="Número referencia" />
+            <TableColumn fx:id="tcDateTransfer" prefWidth="166.0" text="Fecha transferencia" />
         </columns>
       </TableView>
+      <ComboBox fx:id="cbAccountOrigin" layoutX="137.0" layoutY="115.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

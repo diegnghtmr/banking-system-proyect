@@ -1,6 +1,5 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.viewController;
 
-import co.edu.uniquindio.bankingsystem.bankingsystem.controller.CashierManagementController;
 import co.edu.uniquindio.bankingsystem.bankingsystem.controller.LoginController;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
@@ -60,7 +59,7 @@ public class LoginViewController {
 
             if (employeeValidated != null) {
                 closeWindow();
-                goEmployeeDashboard(employeeValidated);
+                goEmployeeData(employeeValidated);
             } else {
                 showMessage("Empleado o contraseña incorrectos", "Error", Alert.AlertType.ERROR);
             }
@@ -79,28 +78,39 @@ public class LoginViewController {
         stage.close();
     }
 
-    private void goEmployeeDashboard(Employee employeeValidated) {
+    private void goEmployeeData(Employee employeeValidated) {
         if (employeeValidated.getTypeEmployee() == TypeEmployee.MANAGER) {
-            browseWindow("/managerInterface.fxml", "Banco - Panel de Gerente");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/managerData.fxml"));
+            try {
+                Parent root = loader.load();
+                ManagerDataViewController controller = loader.getController();
+                controller.setEmployee(employeeValidated);
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.setTitle("Banco - Panel de Gerente");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (employeeValidated.getTypeEmployee() == TypeEmployee.CASHIER) {
-            browseWindow("/cashierInterface.fxml", "Banco - Panel de Cajero");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cashierData.fxml"));
+            try {
+                Parent root = loader.load();
+                CashierDataViewController controller = loader.getController();
+                controller.setEmployee(employeeValidated);
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.setTitle("Banco - Panel de Cajero");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             showMessage("Tipo de empleado no reconocido", "Error", Alert.AlertType.ERROR);
-        }
-    }
-
-    private void browseWindow(String fileNameFxml, String windowTitle) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fileNameFxml));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle(windowTitle);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -120,7 +130,7 @@ public class LoginViewController {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Banco - Inicio");
+            stage.setTitle("App Byte Bank");
             stage.show();
 
             closeWindow();
