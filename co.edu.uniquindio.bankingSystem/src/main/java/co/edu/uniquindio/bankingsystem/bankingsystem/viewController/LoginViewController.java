@@ -1,8 +1,10 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.viewController;
 
+import co.edu.uniquindio.bankingsystem.bankingsystem.controller.AuthenticationProxy;
 import co.edu.uniquindio.bankingsystem.bankingsystem.controller.LoginController;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
+import co.edu.uniquindio.bankingsystem.bankingsystem.services.IAuthenticationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +18,7 @@ import javafx.stage.Stage;
 
 public class LoginViewController {
 
-    LoginController loginController;
+    IAuthenticationService authenticationService;
 
     @FXML
     private Button btnReturn;
@@ -42,7 +44,7 @@ public class LoginViewController {
 
     @FXML
     void initialize() {
-        loginController = new LoginController();
+        authenticationService = new AuthenticationProxy();
     }
 
     private void start() {
@@ -55,7 +57,7 @@ public class LoginViewController {
             String employee = txtIdentification.getText();
             String password = txtPassword.getText();
 
-            Employee employeeValidated = loginController.validateEmployee(employee, password);
+            Employee employeeValidated = authenticationService.validateEmployee(employee, password);
 
             if (employeeValidated != null) {
                 closeWindow();

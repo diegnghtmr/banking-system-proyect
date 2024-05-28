@@ -1,9 +1,10 @@
 package co.edu.uniquindio.bankingsystem.bankingsystem.viewController;
 
-import co.edu.uniquindio.bankingsystem.bankingsystem.controller.LoginController;
+import co.edu.uniquindio.bankingsystem.bankingsystem.controller.AuthenticationProxy;
 import co.edu.uniquindio.bankingsystem.bankingsystem.controller.RegisterController;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Employee;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
+import co.edu.uniquindio.bankingsystem.bankingsystem.services.IAuthenticationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 
 public class RegisterViewController {
 
-    RegisterController registerController;
+    IAuthenticationService authenticationService;
 
     @FXML
     private Button btnRegistration;
@@ -57,7 +58,7 @@ public class RegisterViewController {
 
     @FXML
     void initialize() {
-        registerController = new RegisterController();
+        authenticationService = new AuthenticationProxy();
     }
 
     public void register(){
@@ -82,7 +83,7 @@ public class RegisterViewController {
                 return;
             }
 
-            Employee newEmployee = registerController.addEmployee(identification, name, email, address, password, phone);
+            Employee newEmployee = authenticationService.addEmployee(identification, name, email, address, password, phone);
 
             if (newEmployee != null) {
                 showMessage("Gerente registrado correctamente", "Información", Alert.AlertType.INFORMATION);
