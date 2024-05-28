@@ -556,15 +556,7 @@ return bankingSystem.createCashier(cashier);
     }
 
     private LoanDto builLoanDto(Loan loan) {
-        String state = "";
-        if (loan.getAmount()>2000000){
-            state = "Denegado";
-        } else if (loan.getAmount()>0 && loan.getAmount()<2000000){
-            state = "Aprobado";
-        } else if(loan.getAmount()<0){
-            state = "Denegado";
-
-        }
+        String state = loan.getState();
         return new LoanDto( loan.getCustomer().getDNI(),
                 loan.getReferenceNumber(),
                 loan.getLoanDate().toString(),

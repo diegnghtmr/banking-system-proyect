@@ -158,6 +158,7 @@ public class LoanManagementViewController {
             txtReferenceNumber.setText(loanSelected.referenceNumber());
             txtAmount.setText(String.valueOf(loanSelected.amount()));
             dpLoanDate.setValue(LocalDate.parse(loanSelected.loanDate()));
+            
 
         }
     }
@@ -215,7 +216,6 @@ public class LoanManagementViewController {
         String referenceNumber = txtReferenceNumber.getText();
         LocalDate loanDate = dpLoanDate.getValue();
         double amount = Double.parseDouble(txtAmount.getText());
-
         return new Loan(selectedCustomer, referenceNumber, loanDate, amount);
     }
 
@@ -233,7 +233,5 @@ public class LoanManagementViewController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
-
 
 }
