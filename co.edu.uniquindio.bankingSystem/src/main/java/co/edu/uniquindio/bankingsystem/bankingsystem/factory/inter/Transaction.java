@@ -44,4 +44,8 @@ public abstract class Transaction {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public String getTransactionType() {
+        return this.getClass().getSimpleName();
+    }
 }

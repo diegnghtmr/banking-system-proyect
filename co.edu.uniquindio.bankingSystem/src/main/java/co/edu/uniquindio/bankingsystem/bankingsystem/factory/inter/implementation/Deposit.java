@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 public class Deposit extends Transaction{
     private ICommand depositCommand;
+
     public Deposit(){
         super();
     }

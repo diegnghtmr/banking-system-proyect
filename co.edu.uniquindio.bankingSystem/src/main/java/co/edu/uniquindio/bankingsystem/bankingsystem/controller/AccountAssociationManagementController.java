@@ -3,8 +3,9 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.controller;
 import co.edu.uniquindio.bankingsystem.bankingsystem.dto.AccountAssociationDto;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.ModelFactory;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
-import co.edu.uniquindio.bankingsystem.bankingsystem.model.AccountAssociation;
+import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.SavingsAccount;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.Customer;
+import co.edu.uniquindio.bankingsystem.bankingsystem.model.AccountAssociation;
 
 import java.util.List;
 
@@ -27,8 +28,6 @@ public class AccountAssociationManagementController {
     public List<Account> getUnassociatedAccounts() {
         return modelFactory.getUnassociatedAccounts();
     }
-
-
     public void addAssociation(AccountAssociation newAssociation) {
         modelFactory.addAssociation(newAssociation);
     }

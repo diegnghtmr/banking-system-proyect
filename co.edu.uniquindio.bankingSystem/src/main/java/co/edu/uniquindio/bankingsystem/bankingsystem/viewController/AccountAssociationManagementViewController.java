@@ -20,6 +20,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class AccountAssociationManagementViewController {
+
+
     AccountAssociationManagementController accountAssociationManagementController;
     ObservableList<AccountAssociationDto> accountAssociationList = FXCollections.observableArrayList();
     FilteredList<AccountAssociationDto> filteredAccountAssociationList;

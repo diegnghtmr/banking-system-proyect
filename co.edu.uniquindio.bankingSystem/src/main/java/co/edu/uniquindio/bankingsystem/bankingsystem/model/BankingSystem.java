@@ -2,6 +2,7 @@ package co.edu.uniquindio.bankingsystem.bankingsystem.model;
 
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.TransactionFactory;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Account;
+import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.Transaction;
 import co.edu.uniquindio.bankingsystem.bankingsystem.factory.inter.implementation.*;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.builder.EmployeeBuilder;
 import co.edu.uniquindio.bankingsystem.bankingsystem.model.enums.TypeEmployee;
@@ -547,5 +548,34 @@ public class BankingSystem {
             }
         }
         return false;
+    }
+
+    public List<Transaction> getTransactionList() {
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList.addAll(depositList);
+        transactionList.addAll(withdrawalList);
+        transactionList.addAll(transferList);
+        return transactionList;
+    }
+
+    public List<Transaction> getPreviousRecords(LocalDate date, Account account) {
+        List<Transaction> transactionList = getTransactionList();
+        List<Transaction> previousRecords = new ArrayList<>();
+        for (Transaction transaction : transactionList) {
+            if (transaction.getDate().isBefore(date) && transaction.getAccount().equals(account)) {
+                previousRecords.add(transaction);
+            }
+        }
+        return previousRecords;
+    }
+
+    public Transaction lookByAccount(Account account) {
+        List<Transaction> transactionList = getTransactionList();
+        for (Transaction transaction : transactionList) {
+            if (transaction.getAccount().equals(account)) {
+                return transaction;
+            }
+        }
+        return null;
     }
 }

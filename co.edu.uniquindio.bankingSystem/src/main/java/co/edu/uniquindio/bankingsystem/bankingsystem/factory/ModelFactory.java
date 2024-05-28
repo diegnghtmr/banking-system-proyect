@@ -690,4 +690,16 @@ public class ModelFactory {
     public boolean addLoan(Loan newLoan) {
         return bankingSystem.addLoan(newLoan);
     }
+
+    public List<Transaction> getTransactionList() {
+        return bankingSystem.getTransactionList();
+    }
+
+    public List<Transaction> getPreviousRecords(LocalDate date, Account account) {
+        return bankingSystem.getPreviousRecords(date, account);
+    }
+
+    public Transaction lookByAccount(Account account) {
+        return bankingSystem.lookByAccount(account);
+    }
 }

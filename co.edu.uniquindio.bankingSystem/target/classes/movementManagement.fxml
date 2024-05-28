@@ -21,8 +21,8 @@
       <Separator layoutX="26.0" layoutY="60.0" prefHeight="3.0" prefWidth="611.0" />
       <Label layoutX="39.0" layoutY="84.0" text="Cuenta:" />
       <Label layoutX="332.0" layoutY="84.0" text="Fecha Movimiento:" />
-      <ComboBox fx:id="cbAccount" layoutX="95.0" layoutY="80.0" onAction="#onAccount" prefWidth="150.0" />
-      <DatePicker fx:id="dpMovementDate" layoutX="447.0" layoutY="80.0" onAction="#onMovementDate" />
+      <ComboBox fx:id="cbAccount" layoutX="95.0" layoutY="80.0" prefWidth="150.0" />
+      <DatePicker fx:id="dpMovement" layoutX="447.0" layoutY="80.0" />
       <Button fx:id="btnLook" layoutX="203.0" layoutY="141.0" mnemonicParsing="false" onAction="#onLook" text="Ver" />
       <Button fx:id="btnGetPreviousRecords" layoutX="355.0" layoutY="141.0" mnemonicParsing="false" onAction="#onGetPreviousRecords" text="Obtener Registros Previos" />
       <TextField fx:id="txtFilter" alignment="CENTER" layoutX="178.0" layoutY="184.0" prefHeight="24.0" prefWidth="309.0" promptText="Filtrar">
@@ -30,14 +30,13 @@
             <Font name="Cambria" size="12.0" />
          </font>
       </TextField>
-      <TableView fx:id="tblData" layoutX="45.0" layoutY="226.0" prefHeight="294.0" prefWidth="573.0">
+      <TableView fx:id="tblMovement" layoutX="45.0" layoutY="226.0" prefHeight="294.0" prefWidth="573.0">
         <columns>
           <TableColumn fx:id="tcAccount" prefWidth="67.0" text="Cuenta" />
-          <TableColumn fx:id="tcReferenceNumber" prefWidth="131.0" text="Número de Referencia" />
-            <TableColumn fx:id="tcAmount" prefWidth="69.0" text="Cantidad" />
-            <TableColumn fx:id="tcMovementDate" prefWidth="113.0" text="Fecha Movimiento" />
-            <TableColumn fx:id="tcTransactionType" prefWidth="114.0" text="Tipo Transacción" />
-            <TableColumn fx:id="tcStatus" prefWidth="78.0" text="Estado" />
+          <TableColumn fx:id="tcReferenceNumber" prefWidth="158.0" text="Número de Referencia" />
+            <TableColumn fx:id="tcAmount" prefWidth="83.0" text="Cantidad" />
+            <TableColumn fx:id="tcMovementDate" prefWidth="135.0" text="Fecha Movimiento" />
+            <TableColumn fx:id="tcTransactionType" prefWidth="129.0" text="Tipo Transacción" />
         </columns>
       </TableView>
       <Separator layoutX="27.0" layoutY="124.0" prefHeight="3.0" prefWidth="611.0" />
