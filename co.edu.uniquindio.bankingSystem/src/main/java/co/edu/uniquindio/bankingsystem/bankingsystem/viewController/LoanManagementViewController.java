@@ -158,7 +158,7 @@ public class LoanManagementViewController {
             txtReferenceNumber.setText(loanSelected.referenceNumber());
             txtAmount.setText(String.valueOf(loanSelected.amount()));
             dpLoanDate.setValue(LocalDate.parse(loanSelected.loanDate()));
-            
+
 
         }
     }
