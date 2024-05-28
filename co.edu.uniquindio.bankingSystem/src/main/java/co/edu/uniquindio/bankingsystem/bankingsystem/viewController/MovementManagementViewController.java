@@ -20,6 +20,8 @@ import javafx.scene.control.TextField;
 
 public class MovementManagementViewController {
     MovementManagementController movementManagementController;
+    ObservableList<MovementDto> movementList = FXCollections.observableArrayList();
+    FilteredList<MovementDto> filteredMovementList;
 
     @FXML
     private ResourceBundle resources;
@@ -109,14 +111,31 @@ public class MovementManagementViewController {
         movementList.addAll(movementManagementController.getMovementList());
     }
 
-    private void refreshTables() {
-        movementList.clear();
-        tblData.setItems(movementList);
-        getMovementList();
+    private void refreshTablesAndComboBoxes() {
+        movementList.clear(); 
+        getMovementList(); 
+        tblData.setItems(movementList); 
     }
 
-      private void clearData() {
-        cbAccount.getSelectionModel().clearSelection();
-        dpMovementDate.setValue(null);
+    private void setupFilter() {
+        txtFilter.textProperty().addListener((observable, oldValue, newValue) -> {
+            List<MovementDto> originalList = movementManagementController.getMovementList();
+            ObservableList<MovementDto> filteredList = filteredList(originalList, newValue);
+            tblData.setItems(filteredList);
+        });
+    }
+
+    private ObservableList<MovementDto> filteredList(List<MovementDto> originalList, String searchTest) {
+        List<AccountAssociationDto> filteredList = new ArrayList<>();
+        for (MovementDto movementDto : originalList) {
+            if (searchFindsMovementDto(movementDto, searchTest))
+                filteredList.add(MovementDto);
+
+        }
+        return FXCollections.observableList(filteredList);
+    }
+
+    private boolean searchFindsMovementDto(MovementDto movementDto, String searchTest) {
+        return (movementDto.getTransaction().getReferenceNumber().toLowerCase().contains(searchTest.toLowerCase()));
     }
 }
