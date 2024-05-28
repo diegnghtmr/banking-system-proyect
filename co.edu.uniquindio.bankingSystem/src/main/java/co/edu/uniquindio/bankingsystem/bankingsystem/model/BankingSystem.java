@@ -23,6 +23,7 @@ public class BankingSystem {
     private List<Transfer> transferList;
     private List<AccountAssociation> accountAssociationList;
     private List<Loan> loanList;
+    private List<Movement> movementList;
 
 
     public BankingSystem() {
@@ -36,6 +37,7 @@ public class BankingSystem {
         this.transferList = new ArrayList<>();
         this.accountAssociationList = new ArrayList<>();
         this.loanList = new ArrayList<>();
+        this.movementList = new ArrayList<>();
     }
 
     public String getName() {
@@ -75,6 +77,10 @@ public class BankingSystem {
 
     public List<Loan> getLoanList() {
         return loanList;
+    }
+
+    public List<Movement> getMovementList() {
+        return movementList;
     }
 
 

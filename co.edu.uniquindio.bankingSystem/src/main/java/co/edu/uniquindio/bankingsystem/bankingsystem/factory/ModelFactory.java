@@ -35,6 +35,7 @@ public class ModelFactory {
         initEmployee();
         initAccountAssociation();
         initLoan();
+        initMovement();
     }
 
     private void initCustomer() {
@@ -484,6 +485,43 @@ public class ModelFactory {
 
     }
 
+    private void initMovement() {
+         AccountFactory accountFactory = new AccountFactory();
+        TransactionFactory transactionFactory = new TransactionFactory();
+
+        Account account1 = accountFactory.getAccount("SAVINGS");
+        Account account2 = accountFactory.getAccount("CHECKING");
+
+        account1.setBalance(1000000);
+        account2.setBalance(500000);
+
+        Transaction transaction1 = transactionFactory.getTransaction("DEPOSIT");
+        Transaction transaction2 = transactionFactory.getTransaction("WITHDRAWAL");
+        Transaction transaction3 = transactionFactory.getTransaction("TRANSFER");
+
+        transaction1.setAmount(2000);
+        transaction2.setAmount(1000);
+        transaction3.setAmount(500);
+
+        transaction1.setDate(LocalDate.now().minusDays(10));
+        transaction2.setDate(LocalDate.now().minusDays(5));
+        transaction3.setDate(LocalDate.now().minusDays(2));
+
+        transaction1.setAccount(account1);
+        transaction2.setAccount(account2);
+        transaction3.setAccount(account1);
+
+        ((Transfer) transaction3).setAccountDestination(account2);
+
+        account1.getTransactionList().add(transaction1);
+        account2.getTransactionList().add(transaction2);
+        account1.getTransactionList().add(transaction3);
+
+        movimientos.add(transaction1);
+        movimientos.add(transaction2);
+        movimientos.add(transaction3);
+    }
+
     public List<Customer> getCustomerList() {
         return bankingSystem.getCustomerList();
     }
@@ -689,5 +727,36 @@ public class ModelFactory {
 
     public boolean addLoan(Loan newLoan) {
         return bankingSystem.addLoan(newLoan);
+    }
+
+     public List<MovementDto> getMovementList() {
+        List<Movement> movementList = bankingSystem.getMovementList();
+        List<MovementDto> movementDtoList = new ArrayList<>();
+
+        for(Movement movement : movementList) {
+            movementDtoList.add(buildMovementDto(movement));
+        }
+
+        return  movementDtoList;
+    }
+
+    private MovementDto buildMovementDto(Movement movement) {
+        String transactionType = "";
+        if (movement.getTransaction() instanceof Deposit) {
+            transactionType = "Deposito";
+        } else if (movement.getTransaction() instanceof Transfer) {
+            transactionType = "Transferencia";
+        } else if (movement.getTransaction() instanceof Withdrawal) {
+            transactionType = "Retiro";
+        }
+
+        return new MovementDto(
+                movement.getTransaction().getDate(),
+                movement.getTransaction().getAmount(),
+                movement.getTransaction().getAccount(),
+                movement.getTransaction().getReferenceNumber(),
+                movement.getState(),
+                transactionType
+        );
     }
 }
