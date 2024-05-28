@@ -21,6 +21,9 @@ public class BankingSystem {
     private List<Deposit> depositList;
     private List<Withdrawal> withdrawalList;
     private List<Transfer> transferList;
+    private List<Loan> loanList;
+
+    private List<AccountAssociation> accountAssociationList;
 
 
     public BankingSystem() {
@@ -32,6 +35,8 @@ public class BankingSystem {
         this.depositList = new ArrayList<>();
         this.withdrawalList = new ArrayList<>();
         this.transferList = new ArrayList<>();
+        this.accountAssociationList = new ArrayList<>();
+        this.loanList = new ArrayList<>();
     }
 
     public String getName() {
@@ -54,6 +59,10 @@ public class BankingSystem {
         return savingsAccountList;
     }
 
+    public List<Loan> getLoanList() {
+        return loanList;
+    }
+
     public List<Deposit> getDepositList() {
         return depositList;
     }
@@ -64,6 +73,10 @@ public class BankingSystem {
 
     public List<Transfer> getTransferList() {
         return transferList;
+    }
+
+    public List<AccountAssociation> getAccountAssociationList() {
+        return accountAssociationList;
     }
 
     public void addEmployeeList(Employee employee) {
@@ -192,9 +205,9 @@ public class BankingSystem {
 
     private Employee getEmployee(String dni) {
         return getEmployeeList().stream()
-                        .filter(employee -> employee.getDNI().equalsIgnoreCase(dni))
-                        .findFirst()
-                        .orElse(null);
+                .filter(employee -> employee.getDNI().equalsIgnoreCase(dni))
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean removeCashier(Employee cashierSelected) {
@@ -244,7 +257,7 @@ public class BankingSystem {
 
     public boolean createSavingsAccount(SavingsAccount savingsAccount) {
         String savingsAccountFound = searchSavingsAccount(savingsAccount.getAccountNumber());
-        if (savingsAccountFound == null){
+        if (savingsAccountFound == null) {
             savingsAccountList.add(savingsAccount);
             return true;
         }
@@ -253,7 +266,7 @@ public class BankingSystem {
 
     private String searchSavingsAccount(String accountNumber) {
         for (SavingsAccount savingsAccount : getSavingsAccountList()) {
-            if(savingsAccount.getAccountNumber().equalsIgnoreCase(accountNumber)){
+            if (savingsAccount.getAccountNumber().equalsIgnoreCase(accountNumber)) {
                 return savingsAccount.toString();
             }
         }
@@ -261,7 +274,7 @@ public class BankingSystem {
     }
 
     public boolean removeSavingAccount(SavingsAccount selectedSavingsAccount) {
-        if (selectedSavingsAccount != null){
+        if (selectedSavingsAccount != null) {
             int index = savingsAccountList.indexOf(selectedSavingsAccount);
             if (index != -1) {
                 savingsAccountList.remove(index);
@@ -270,7 +283,7 @@ public class BankingSystem {
         }
         return false;
 
-        }
+    }
 
     public boolean updateSavingAccount(SavingsAccount selectedSavingsAccount, SavingsAccount savingsAccountUpdate) {
         int index = savingsAccountList.indexOf(selectedSavingsAccount);
@@ -283,7 +296,7 @@ public class BankingSystem {
 
     public boolean createCheckingAccount(CheckingAccount checkingAccount) {
         String chekingAccountSave = searchCheckingAccount(checkingAccount.getAccountNumber());
-        if(chekingAccountSave == null ) {
+        if (chekingAccountSave == null) {
             checkingAccountList.add(checkingAccount);
             return true;
         }
@@ -291,8 +304,8 @@ public class BankingSystem {
     }
 
     private String searchCheckingAccount(String accountNumber) {
-        for (CheckingAccount checkingAccount : getCheckingAccountList()){
-            if(checkingAccount.getAccountNumber().equalsIgnoreCase(accountNumber)){
+        for (CheckingAccount checkingAccount : getCheckingAccountList()) {
+            if (checkingAccount.getAccountNumber().equalsIgnoreCase(accountNumber)) {
                 return checkingAccount.toString();
             }
         }
@@ -302,7 +315,7 @@ public class BankingSystem {
     public boolean updateCheckingAccount(CheckingAccount selectedChekingAccount, CheckingAccount checkingAccountUpdate) {
         int index = checkingAccountList.indexOf(selectedChekingAccount);
         if (index != -1) {
-            checkingAccountList.set (index, checkingAccountUpdate);
+            checkingAccountList.set(index, checkingAccountUpdate);
             return true;
 
         }
@@ -312,13 +325,131 @@ public class BankingSystem {
     public boolean removeCheckingAccount(CheckingAccount selectedChekingAccount) {
         if (selectedChekingAccount != null) {
             int index = checkingAccountList.indexOf(selectedChekingAccount);
-            if (index != -1){
+            if (index != -1) {
                 checkingAccountList.remove(index);
                 return true;
             }
         }
         return false;
     }
+
+    public boolean isAccountAssociated(Account account) {
+        for (AccountAssociation accountAssociation : getAccountAssociationList()) {
+            if (accountAssociation.getAccount().equals(account)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Account> getUnassociatedAccounts() {
+        List<Account> unassociatedAccounts = new ArrayList<>();
+        for (SavingsAccount savingsAccount : getSavingsAccountList()) {
+            if (!isAccountAssociated(savingsAccount)) {
+                unassociatedAccounts.add(savingsAccount);
+            }
+        }
+        for (CheckingAccount checkingAccount : getCheckingAccountList()) {
+            if (!isAccountAssociated(checkingAccount)) {
+                unassociatedAccounts.add(checkingAccount);
+            }
+        }
+        return unassociatedAccounts;
+    }
+
+    public List<Customer> getUnassociatedCustomers() {
+        List<Customer> unassociatedCustomers = new ArrayList<>();
+        for (Customer customer : getCustomerList()) {
+            if (!isCustomerAssociated(customer)) {
+                unassociatedCustomers.add(customer);
+            }
+        }
+        return unassociatedCustomers;
+    }
+
+    private boolean isCustomerAssociated(Customer customer) {
+        for (AccountAssociation association : getAccountAssociationList()) {
+            if (association.getCustomer().equals(customer)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public void addAssociation(AccountAssociation newAssociation) {
+        getAccountAssociationList().add(newAssociation);
+        newAssociation.getCustomer().setAssociatedAccount(newAssociation.getAccount());
+    }
+
+
+    public boolean removeAssociation(Customer customer, Account account) {
+        for (int i = 0; i < getAccountAssociationList().size(); i++) {
+            AccountAssociation association = getAccountAssociationList().get(i);
+            if (association.getCustomer().getDNI().equals(customer.getDNI()) && association.getAccount().getAccountNumber().equals(account.getAccountNumber())) {
+                getAccountAssociationList().remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Customer getCustomerByDni(String dni) {
+        for (AccountAssociation association : getAccountAssociationList()) {
+            if (association.getCustomer().getDNI().equals(dni)) {
+                return association.getCustomer();
+            }
+        }
+        return null;
+    }
+
+    public Account getAccountByNumber(String accountNumber) {
+        for (AccountAssociation association : getAccountAssociationList()) {
+            if (association.getAccount().getAccountNumber().equals(accountNumber)) {
+                return association.getAccount();
+            }
+        }
+        return null;
+    }
+
+    public List<Customer> getUnassociatedLoans() {
+        List<Customer> unassociatedCustomerList = new ArrayList<>();
+        for (Customer customer : getCustomerList()) {
+            if (!isCustomerAssociatedLoan(customer)) {
+                unassociatedCustomerList.add(customer);
+
+            }
+
+        }
+        return unassociatedCustomerList;
+    }
+
+    private boolean isCustomerAssociatedLoan(Customer customer) {
+        for (Loan loan : getLoanList()) {
+            if (loan.getCustomer().equals(customer)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+
+    public boolean addLoan(Loan newLoan) {
+        if (newLoan != null && !loanExists(newLoan.getReferenceNumber())) {
+            loanList.add(newLoan);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean loanExists(String referenceNumber) {
+        for (Loan loan : loanList) {
+            if (loan.getReferenceNumber().equalsIgnoreCase(referenceNumber)) {
+                return true;
+            }
+        }
+        return false;
 
     public List<Deposit> getDeposit() {
         return depositList;

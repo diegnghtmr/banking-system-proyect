@@ -20,7 +20,6 @@ public class ManagerDataViewController {
 
     @FXML
     private URL location;
-
     @FXML
     private Button btnDashboard;
 
@@ -39,6 +38,7 @@ public class ManagerDataViewController {
     @FXML
     private TextField txtPasswordManager;
 
+
     @FXML
     private void initialize() {
         txtEmailManager.setEditable(false);
@@ -54,7 +54,7 @@ public class ManagerDataViewController {
 
     @FXML
     void onDashboard(ActionEvent event) {
-            browseWindow("/managerInterface.fxml", "Banco - Dashboard Gerente");
+        browseWindow("/managerInterface.fxml", "Banco - Dashboard Gerente");
     }
 
     private void browseWindow(String nameFileFxml, String titleWindow) {
@@ -71,7 +71,7 @@ public class ManagerDataViewController {
             stage.show();
 
             currentStage.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
