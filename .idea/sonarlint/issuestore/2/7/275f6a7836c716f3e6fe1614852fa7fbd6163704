@@ -1,0 +1,11 @@
+
+„
+java:S1192,"HDefine a constant instead of duplicating this literal "DEPOSIT" 4 times.(êÕ•îJ$44e6461a-dc8f-4b5b-9fb7-b70bca27da68
+…
+java:S1192%"IDefine a constant instead of duplicating this literal "CHECKING" 3 times.(ÌßÖ¯J$394191b5-9129-44fb-bd9b-3644115f0db2
+„
+java:S1192$"HDefine a constant instead of duplicating this literal "SAVINGS" 4 times.(ã—œÓJ$22d05843-3230-4d71-afdc-8f033756dcfd
+Œ
+java:S1192-"KDefine a constant instead of duplicating this literal "WITHDRAWAL" 3 times.(‰ôÜ¼ÿÿÿÿÿJ$c670098e-a2fd-4a7b-90ee-e2d615dfb721
+Ú
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(èš÷´ÿÿÿÿÿJ$eebaf70b-f45f-4e8e-9353-c6564f3bcc0b

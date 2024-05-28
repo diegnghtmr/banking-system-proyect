@@ -1,0 +1,6 @@
+
+’	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(๑ÿ๛ÿÿÿÿJ$0b1ec71d-d5c4-426d-bf72-37f288b236ae
+ท
+java:S6204ค"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ชจนJ$8076a007-2654-4b6f-9a89-7ff4f8b7e6e6
+ท
+java:S6204ช"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ชจนJ$b35f9139-dea5-4242-bba6-e276ef16bf21

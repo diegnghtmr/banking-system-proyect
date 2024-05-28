@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bankingsystem.bankingsystem.viewController.CashierManagementViewController">
+   <children>
+      <Label layoutX="242.0" layoutY="14.0" prefHeight="39.0" prefWidth="202.0" text="Gestión del Cajero" textFill="#0ea1d7">
+         <font>
+            <Font name="Cambria" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="91.0" text="Nombre:" />
+      <Separator layoutX="23.0" layoutY="62.0" prefHeight="3.0" prefWidth="617.0" />
+      <Label layoutX="385.0" layoutY="91.0" text="DNI:" />
+      <Label layoutX="55.0" layoutY="138.0" text="Direccion:" />
+      <Label layoutX="385.0" layoutY="138.0" text="Email:" />
+      <Label layoutX="56.0" layoutY="190.0" text="Contraseña:" />
+      <TextField fx:id="txtName" layoutX="129.0" layoutY="87.0" />
+      <TextField fx:id="txtAddress" layoutX="129.0" layoutY="134.0" />
+      <TextField fx:id="txtPassword" layoutX="129.0" layoutY="186.0" />
+      <TextField fx:id="txtDNI" layoutX="468.0" layoutY="87.0" />
+      <TextField fx:id="txtEmail" layoutX="468.0" layoutY="134.0" />
+      <Button fx:id="btnAdd" layoutX="309.0" layoutY="247.0" mnemonicParsing="false" onAction="#onAdd" text="Agregar" />
+      <Button fx:id="btnNew" layoutX="108.0" layoutY="247.0" mnemonicParsing="false" onAction="#onNew" text="Nuevo" />
+      <Button fx:id="btnUpdate" layoutX="503.0" layoutY="247.0" mnemonicParsing="false" onAction="#onUpdate" text="Actualizar" />
+      <Separator layoutX="24.0" layoutY="230.0" prefHeight="3.0" prefWidth="617.0" />
+      <TableView fx:id="tblCashier" layoutX="18.0" layoutY="325.0" prefHeight="156.0" prefWidth="630.0">
+         <columns>
+            <TableColumn fx:id="tcName" prefWidth="97.0" text="Nombre" />
+            <TableColumn fx:id="tcDNI" prefWidth="77.0" text="DNI" />
+            <TableColumn fx:id="tcAddress" prefWidth="79.0" text="Direccion" />
+            <TableColumn fx:id="tcPhoneNumber" prefWidth="75.0" text="Telefono" />
+            <TableColumn fx:id="tcEmail" prefWidth="118.0" text="Email" />
+            <TableColumn fx:id="tcPassword" prefWidth="111.0" text="Contraseña" />
+            <TableColumn fx:id="tcRegistrationDate" prefWidth="72.0" text="Registro" />
+         </columns>
+      </TableView>
+      <Button fx:id="btbRemove" layoutX="309.0" layoutY="497.0" mnemonicParsing="false" onAction="#onRemove" text="Eliminar" />
+      <TextField fx:id="txtFilter" alignment="TOP_CENTER" layoutX="105.0" layoutY="286.0" prefHeight="25.0" prefWidth="466.0" promptText="Filtrar">
+         <effect>
+            <Glow level="0.0" />
+         </effect>
+      </TextField>
+      <Label layoutX="385.0" layoutY="190.0" text="Telefono:" />
+      <TextField fx:id="txtPhoneNumber" layoutX="468.0" layoutY="186.0" />
+   </children>
+</AnchorPane>

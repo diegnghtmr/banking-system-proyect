@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bankingsystem.bankingsystem.viewController.CashierDataViewController">
+   <children>
+      <ImageView fitHeight="323.0" fitWidth="322.0" layoutX="301.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/logo.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="30.0" layoutY="104.0" prefHeight="3.0" prefWidth="598.0" />
+      <Label layoutX="97.0" layoutY="25.0" prefHeight="68.0" prefWidth="509.0" text="¡BIENVENIDO, CAJERO!" textFill="#0ea1d7">
+         <font>
+            <Font name="Cambria" size="46.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="145.0" text="Nombre: " />
+      <Label layoutX="43.0" layoutY="194.0" text="Id: " />
+      <Label layoutX="43.0" layoutY="242.0" text="Correo: " />
+      <Label layoutX="43.0" layoutY="293.0" text="Contraseña: " />
+      <TextField fx:id="txtEmaiCashier" layoutX="109.0" layoutY="238.0" />
+      <TextField fx:id="txtIdCashier" layoutX="109.0" layoutY="190.0" />
+      <TextField fx:id="txtCashierName" layoutX="109.0" layoutY="141.0" />
+      <TextField fx:id="txtPasswordCashier" layoutX="109.0" layoutY="289.0" />
+      <Separator layoutX="32.0" layoutY="336.0" prefHeight="3.0" prefWidth="598.0" />
+      <Label layoutX="32.0" layoutY="355.0" prefHeight="32.0" prefWidth="322.0" text="&quot;Incluso cuando las cosas salen muy very very, recuerda: " />
+      <Label layoutX="334.0" layoutY="362.0" text="tu memoria muscular sabe el camino. Cada caída es una" />
+      <Label layoutX="76.0" layoutY="378.0" prefHeight="17.0" prefWidth="283.0" text=" lección que te acerca más a la meta. No olvides que " />
+      <Label layoutX="357.0" layoutY="378.0" text="esto vale la plata. ¡Persiste y triunfarás!&quot;" />
+      <Separator layoutX="31.0" layoutY="415.0" prefHeight="3.0" prefWidth="598.0" />
+      <Button fx:id="btnSignOff" layoutX="33.0" layoutY="494.0" mnemonicParsing="false" onAction="#onSignOff" text="Cerrar sesión" />
+      <Button fx:id="btnDashboard" layoutX="533.0" layoutY="494.0" mnemonicParsing="false" onAction="#onDashboard" text="Ir al Dashboard" />
+   </children>
+</AnchorPane>
