@@ -356,7 +356,7 @@ public class BankingSystem {
             return true;
         } else {
             deposit.setReferenceNumber(deposit.getReferenceNumber() + 1);
-            return createDeposit(deposit); // llamada recursiva
+            return createDeposit(deposit); // recursive call
         }
     }
 
@@ -420,7 +420,7 @@ public class BankingSystem {
             return true;
         } else {
             withdrawal.setReferenceNumber(withdrawal.getReferenceNumber() + 1);
-            return createWithdrawal(withdrawal); // llamada recursiva
+            return createWithdrawal(withdrawal); // recursive call
         }
     }
 

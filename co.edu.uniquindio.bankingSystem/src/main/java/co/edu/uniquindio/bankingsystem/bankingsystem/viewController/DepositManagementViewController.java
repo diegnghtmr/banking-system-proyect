@@ -176,16 +176,24 @@ public class DepositManagementViewController {
 
     private void addDeposit() {
         if (validateForm()) {
-            Deposit deposit = buildDataDeposit();
-            if (depositManagementController.createDeposit(deposit)) {
-                depositList.add(deposit);
-                showMessage("Notificación Deposito", "Deposito creado",
-                        "El deposito ha sido creado con éxito", Alert.AlertType.INFORMATION);
-                clearData();
-                deselectDeposit();
+            Account account = cbAccount.getValue();
+            double amount = Double.parseDouble(txtAmount.getText());
+
+            if (amount <= 0) {
+                showMessage("Error", "Monto insuficiente",
+                        "El monto a depositar debe ser mayor que cero", Alert.AlertType.ERROR);
             } else {
-                showMessage("Error Deposito", "Creación fallida",
-                        "No se pudo crear el deposito.", Alert.AlertType.ERROR);
+                Deposit deposit = buildDataDeposit(account, amount);
+                if (depositManagementController.createDeposit(deposit)) {
+                    depositList.add(deposit);
+                    showMessage("Notificación Deposito", "Deposito creado",
+                            "El deposito ha sido creado con éxito", Alert.AlertType.INFORMATION);
+                    clearData();
+                    deselectDeposit();
+                } else {
+                    showMessage("Error Deposito", "Creación fallida",
+                            "No se pudo crear el deposito.", Alert.AlertType.ERROR);
+                }
             }
         } else {
             showMessage("Error", "Datos invalidos",
@@ -193,10 +201,9 @@ public class DepositManagementViewController {
         }
     }
 
-    private Deposit buildDataDeposit() {
-         Deposit deposit= depositManagementController.createDepositProduct();
-         deposit.setAmount(Double.parseDouble(txtAmount.getText()));
-         deposit.setAccount(cbAccount.getValue());
+    private Deposit buildDataDeposit(Account account, double amount) {
+        Deposit deposit = depositManagementController.createDepositProduct();
+        deposit.executeDeposit(account, amount);
         return deposit;
     }
 

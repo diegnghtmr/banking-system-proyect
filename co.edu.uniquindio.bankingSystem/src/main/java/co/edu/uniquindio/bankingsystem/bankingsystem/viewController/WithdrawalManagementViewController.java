@@ -175,16 +175,28 @@ public class WithdrawalManagementViewController {
 
     private void addWithdrawal() {
         if (validateForm()) {
-            Withdrawal withdrawal = buildDataWithdrawal();
-            if (withdrawalManagementController.createWithdrawal(withdrawal)) {
-                withdrawalList.add(withdrawal);
-                showMessage("Notificación Retiro", "Retiro creado",
-                        "El retiro ha sido creado con éxito", Alert.AlertType.INFORMATION);
-                clearData();
-                deselectWithdrawal();
+            Account account = cbAccount.getValue();
+            double amount = Double.parseDouble(txtAmount.getText());
+            Withdrawal withdrawalInstance = new Withdrawal();
+
+            if (amount <= withdrawalInstance.getCommission()) {
+                showMessage("Error", "Monto insuficiente",
+                        "El monto a retirar debe ser mayor que la comisión", Alert.AlertType.ERROR);
+            } else if (account.getBalance() < amount) {
+                showMessage("Error", "Saldo insuficiente",
+                        "La cuenta no tiene suficiente saldo para realizar el retiro", Alert.AlertType.ERROR);
             } else {
-                showMessage("Error Retiro", "Creación fallida",
-                        "No se pudo crear el retiro.", Alert.AlertType.ERROR);
+                Withdrawal withdrawal = buildDataWithdrawal(account, amount);
+                if (withdrawalManagementController.createWithdrawal(withdrawal)) {
+                    withdrawalList.add(withdrawal);
+                    showMessage("Notificación Retiro", "Retiro creado",
+                            "El retiro ha sido creado con éxito", Alert.AlertType.INFORMATION);
+                    clearData();
+                    deselectWithdrawal();
+                } else {
+                    showMessage("Error Retiro", "Creación fallida",
+                            "No se pudo crear el retiro.", Alert.AlertType.ERROR);
+                }
             }
         } else {
             showMessage("Error", "Datos invalidos",
@@ -192,16 +204,15 @@ public class WithdrawalManagementViewController {
         }
     }
 
+    private Withdrawal buildDataWithdrawal(Account account, double amount) {
+        Withdrawal withdrawal = withdrawalManagementController.createWithdrawalProduct();
+        withdrawal.executeWithdrawal(account, amount);
+        return withdrawal;
+    }
+
     private boolean validateForm() {
         return !txtAmount.getText().isEmpty()
                 && cbAccount.getValue() != null;
-    }
-
-    private Withdrawal buildDataWithdrawal() {
-        Withdrawal withdrawal = withdrawalManagementController.createWithdrawalProduct();
-        withdrawal.setAccount(cbAccount.getValue());
-        withdrawal.setAmount(Double.parseDouble(txtAmount.getText()));
-        return withdrawal;
     }
 
     private void clearData() {
