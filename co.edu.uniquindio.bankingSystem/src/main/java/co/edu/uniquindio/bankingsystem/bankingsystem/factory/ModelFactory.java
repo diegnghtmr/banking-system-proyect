@@ -46,6 +46,14 @@ public class ModelFactory {
         Account account6 = accountFactory.getAccount("CHECKING");
         Account account7 = accountFactory.getAccount("SAVINGS");
 
+        account1.setBalance(1000000);
+        account2.setBalance(500000);
+        account3.setBalance(200000);
+        account4.setBalance(100000);
+        account5.setBalance(300000);
+        account6.setBalance(150000);
+        account7.setBalance(400000);
+
         Transaction transaction1 = transactionFactory.getTransaction("DEPOSIT");
         Transaction transaction2 = transactionFactory.getTransaction("WITHDRAWAL");
         Transaction transaction3 = transactionFactory.getTransaction("DEPOSIT");
@@ -59,18 +67,18 @@ public class ModelFactory {
         Transaction transaction11 = transactionFactory.getTransaction("TRANSFER");
         Transaction transaction12 = transactionFactory.getTransaction("TRANSFER");
 
-        transaction1.setAmount(10500);
-        transaction2.setAmount(5006687);
-        transaction3.setAmount(20006);
-        transaction4.setAmount(1000000);
-        transaction5.setAmount(300088);
-        transaction6.setAmount(150077);
-        transaction7.setAmount(400077);
-        transaction8.setAmount(5000);
-        transaction9.setAmount(200054);
-        transaction10.setAmount(1090000);
-        transaction11.setAmount(300076);
-        transaction12.setAmount(150000);
+        transaction1.setAmount(1050);
+        transaction2.setAmount(56687);
+        transaction3.setAmount(206);
+        transaction4.setAmount(1000);
+        transaction5.setAmount(3088);
+        transaction6.setAmount(1077);
+        transaction7.setAmount(4077);
+        transaction8.setAmount(500);
+        transaction9.setAmount(2054);
+        transaction10.setAmount(1900);
+        transaction11.setAmount(3076);
+        transaction12.setAmount(1500);
 
         transaction1.setDate(LocalDate.now().minusMonths(5));
         transaction2.setDate(LocalDate.now().minusMonths(1));
@@ -200,6 +208,14 @@ public class ModelFactory {
                 .setBirthDate(LocalDate.of(1970, 9, 5))
                 .setRegistrationDate(LocalDate.now().minusYears(7))
                 .build();
+
+        account1.setCustomer(customer1);
+        account2.setCustomer(customer2);
+        account3.setCustomer(customer3);
+        account4.setCustomer(customer4);
+        account5.setCustomer(customer5);
+        account6.setCustomer(customer6);
+        account7.setCustomer(customer7);
 
         bankingSystem.addSavingsAccountList((SavingsAccount) account1);
         bankingSystem.addCheckingAccountList((CheckingAccount) account2);

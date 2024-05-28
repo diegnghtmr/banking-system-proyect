@@ -182,16 +182,29 @@ public class TransferManagementViewController {
 
     private void addTransfer() {
         if (validateForm()) {
-            Transfer transfer = buildDataTransfer();
-            if (transferManagementController.createTransfer(transfer)) {
-                transferList.add(transfer);
-                showMessage("Notificacion Transferencia", "Transferencia Creada",
-                        "La transferencia ha sido creada con exito", Alert.AlertType.INFORMATION);
-                clearData();
-                deselectTransfer();
+            Account originAccount = cbAccountOrigin.getValue();
+            Account destinationAccount = transferManagementController.getAccountByAccountNumber(txtAccountDestination.getText());
+            double amount = Double.parseDouble(txtAmount.getText());
+            Transfer transferInstance = new Transfer();
+
+            if (amount <= transferInstance.getCommission()) {
+                showMessage("Error", "Monto insuficiente",
+                        "El monto a transferir debe ser mayor que la comisión", Alert.AlertType.ERROR);
+            } else if (originAccount.getBalance() < amount) {
+                showMessage("Error", "Saldo insuficiente",
+                        "La cuenta de origen no tiene suficiente saldo para realizar la transferencia", Alert.AlertType.ERROR);
             } else {
-                showMessage("Error Transferencia", "Creación fallida",
-                        "No se pudo crear la transferencia", Alert.AlertType.ERROR);
+                Transfer transfer = buildDataTransfer(originAccount, destinationAccount, amount);
+                if (transferManagementController.createTransfer(transfer)) {
+                    transferList.add(transfer);
+                    showMessage("Notificacion Transferencia", "Transferencia Creada",
+                            "La transferencia ha sido creada con exito", Alert.AlertType.INFORMATION);
+                    clearData();
+                    deselectTransfer();
+                } else {
+                    showMessage("Error Transferencia", "Creación fallida",
+                            "No se pudo crear la transferencia", Alert.AlertType.ERROR);
+                }
             }
         } else {
             showMessage("Error", "Datos invalidos",
@@ -199,18 +212,16 @@ public class TransferManagementViewController {
         }
     }
 
+    private Transfer buildDataTransfer(Account originAccount, Account destinationAccount, double amount) {
+        Transfer transfer = transferManagementController.createTransferProduct();
+        transfer.executeTransfer(originAccount, destinationAccount, amount);
+        return transfer;
+    }
+
     private boolean validateForm() {
         return !txtAmount.getText().isEmpty()
                 && !txtAccountDestination.getText().isEmpty()
                 && cbAccountOrigin.getValue() != null;
-    }
-
-    private Transfer buildDataTransfer() {
-        Transfer transfer = transferManagementController.createTransferProduct();
-        transfer.setAccount(cbAccountOrigin.getValue());
-        transfer.setAmount(Double.parseDouble(txtAmount.getText()));
-        transfer.setAccountDestination(transferManagementController.getAccountByAccountNumber(txtAccountDestination.getText()));
-        return transfer;
     }
 
     private void clearData() {

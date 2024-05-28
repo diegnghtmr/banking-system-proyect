@@ -54,7 +54,7 @@ public class ManagerDataViewController {
 
     @FXML
     void onDashboard(ActionEvent event) {
-            browseWindow("/cashierInterface.fxml", "Banco - Dashboard Gerente");
+            browseWindow("/managerInterface.fxml", "Banco - Dashboard Gerente");
     }
 
     private void browseWindow(String nameFileFxml, String titleWindow) {

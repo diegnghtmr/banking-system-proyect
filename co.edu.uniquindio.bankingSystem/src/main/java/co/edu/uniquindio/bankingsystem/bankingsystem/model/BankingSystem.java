@@ -368,6 +368,15 @@ public class BankingSystem {
     }
 
     public boolean createTransfer(Transfer transfer) {
+        Account originAccount = transfer.getAccount();
+        Account destinationAccount = transfer.getAccountDestination();
+        double amount = transfer.getAmount();
+
+        // Validación: la cuenta de origen y destino no pueden ser la misma
+        if (originAccount.equals(destinationAccount) || amount == 0) {
+            return false;
+        }
+
         Transfer transferReference = getTransferReference(transfer.getReferenceNumber());
 
         if (transferReference == null) {
