@@ -34,9 +34,9 @@
             <TableView fx:id="tableManagementAccounts" layoutX="40.0" layoutY="284.0" prefHeight="223.0" prefWidth="595.0">
                <columns>
                   <TableColumn fx:id="tcAccountNumber" prefWidth="118.66665267944336" text="Número de cuenta" />
-                  <TableColumn fx:id="tcBalance" prefWidth="71.33334350585938" text="Saldo" />
-                  <TableColumn fx:id="tcSecurityNumber" prefWidth="157.3333282470703" text="Número de seguridad" />
-                  <TableColumn fx:id="tcOpeningDate" prefWidth="141.99996948242188" text="Fecha de apertura" />
+                  <TableColumn fx:id="tcBalance" prefWidth="135.0" text="Saldo" />
+                  <TableColumn fx:id="tcSecurityNumber" prefWidth="137.0" text="Número de seguridad" />
+                  <TableColumn fx:id="tcOpeningDate" prefWidth="203.0" text="Fecha de apertura" />
                </columns>
             </TableView>
             <Button fx:id="btnRemove" layoutX="304.0" layoutY="514.0" mnemonicParsing="false" onAction="#onRemove" text="Eliminar" />

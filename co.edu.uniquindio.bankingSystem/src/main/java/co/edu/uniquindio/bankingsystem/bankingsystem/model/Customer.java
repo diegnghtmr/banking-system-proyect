@@ -66,4 +66,12 @@ public class Customer {
     public LocalDate getRegistrationDate(){
         return registrationDate;
     }
+
+    public void setAssociatedAccount(Account associatedAccount) {
+        this.associatedAccount = associatedAccount;
+    }
+    @Override
+    public String toString() {
+        return getDNI();
+    }
 }
